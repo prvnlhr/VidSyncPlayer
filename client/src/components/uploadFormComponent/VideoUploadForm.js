@@ -131,7 +131,7 @@ const VideoUploadForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seek
                                                 onTimeUpdate={seekMode ? handleSeek : null}
                                                 onMouseEnter={() => setSeekMode(true)}>
                                                 <source src={selectedVideo} type="video/mp4" />
-                                                <track kind="subtitles" src="../playerComponent/sub.vtt" srclang="en-us" label="English" />
+                                                {/* <track kind="subtitles" src="../playerComponent/sub.vtt" srclang="en-us" label="English" /> */}
                                                 Your browser does not support the video tag.
                                             </video>
 
