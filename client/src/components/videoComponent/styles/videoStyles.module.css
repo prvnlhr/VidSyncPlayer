@@ -1,0 +1,42 @@
+.videoWrapper {
+    aspect-ratio: 16/10;
+    height: 90%;
+    margin-left: 15px;
+    margin-right: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    overflow: hidden;
+
+}
+
+.videoWrapperShrink {
+    aspect-ratio: 16/10;
+    height: 180px;
+    margin-left: 0px;
+    margin-right: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.thumbnailWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.videoThumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
