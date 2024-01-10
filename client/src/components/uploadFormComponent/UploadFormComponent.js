@@ -24,7 +24,7 @@ const UploadFormComponent = () => {
     const videoRef = useRef(null);
 
     const [startTime, setStartTime] = useState(0);
-    const [endTime, setEndTime] = useState(0);
+    const [endTime, setEndTime] = useState(0.01);
 
     const [sliderTime, setSliderTime] = useState(0);
 
@@ -76,7 +76,7 @@ const UploadFormComponent = () => {
         currentTime = video.currentTime;
         currentTime = video.currentTime;
         setStartTime(currentTime);
-        setEndTime(currentTime + 0.001);
+        setEndTime(currentTime + 0.01);
         updateShowSubTitleOverlay(currentTime);
     };
 

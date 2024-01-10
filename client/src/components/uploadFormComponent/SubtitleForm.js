@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Icon } from '@iconify/react';
 import styles from "./styles/subTitileFormStyles.module.css";
 
-const SubtitleForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seekMode, setSeekMode, showActiveSubtitle, setShowActiveSubtitle, setStartTime, startTime, setEndTime, endTime, subtitles, setSubtitles, selectedVideo, setSliderTime, sliderTime }) => {
+const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setShowActiveSubtitle, setStartTime, startTime, setEndTime, endTime, subtitles, setSubtitles, selectedVideo, setSliderTime }) => {
 
 
 
@@ -46,38 +46,37 @@ const SubtitleForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seekMod
     const handleStarTimeIncrement = (unit) => {
 
         setSeekMode(true);
-
         const video = videoRef.current;
         let newTime;
 
         switch (unit) {
             case 'minutes':
-                newTime = parseFloat(startTime) + 60; // Increment by 60 seconds (1 minute)
+                newTime = parseFloat(startTime) + 60;
                 break;
             case 'seconds':
-                newTime = parseFloat(startTime) + 1; // Increment by 1 second
+                newTime = parseFloat(startTime) + 1;
                 break;
             case 'milliseconds':
-                newTime = parseFloat(startTime) + 0.01; // Increment by 0.1 second (100 milliseconds)
+                // newTime = parseFloat(startTime) + 0.001; // 1 milli
+                // newTime = parseFloat(startTime) + 0.01; // 10 milli
+                newTime = parseFloat(startTime) + 0.1; // 100 milli
                 break;
             default:
                 break;
         }
+
         if (video) {
             setStartTime(newTime);
-            setEndTime(newTime + 0.1); // Adjust end time accordingly
+            // setEndTime(newTime + 0.01); // Update end time correctly
             video.currentTime = newTime;
             setSliderTime(newTime);
         }
-
-
-
     };
+
 
     const handleStarTimeDecrement = (unit) => {
 
         setSeekMode(true);
-
 
         const video = videoRef.current;
         let newTime;
@@ -90,14 +89,14 @@ const SubtitleForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seekMod
                 newTime = Math.max(0, parseFloat(startTime) - 1); // Decrement by 1 second, ensuring it doesn't go below 0
                 break;
             case 'milliseconds':
-                newTime = Math.max(0, parseFloat(startTime) - 0.01); // Decrement by 0.1 second (100 milliseconds), ensuring it doesn't go below 0
+                newTime = Math.max(0, parseFloat(startTime) - 0.1); // Decrement by 0.1 second (100 milliseconds), ensuring it doesn't go below 0
                 break;
             default:
                 break;
         }
 
         setStartTime(newTime);
-        setEndTime(newTime + 0.1); // Adjust end time accordingly
+        // setEndTime(newTime + 0.01); // Adjust end time accordingly
         video.currentTime = newTime;
         setSliderTime(newTime);
 
@@ -106,8 +105,6 @@ const SubtitleForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seekMod
     const handleIncrementEndTime = (unit) => {
 
         setSeekMode(false);
-
-
 
         const video = videoRef.current;
         let newEndTime;
@@ -120,7 +117,7 @@ const SubtitleForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seekMod
                 newEndTime = parseFloat(endTime) + 1; // Increment by 1 second
                 break;
             case 'milliseconds':
-                newEndTime = parseFloat(endTime) + 0.01; // Increment by 0.1 second (100 milliseconds)
+                newEndTime = parseFloat(endTime) + 0.1; // Increment by 0.1 second (100 milliseconds)
                 break;
             default:
                 break;
@@ -129,8 +126,6 @@ const SubtitleForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seekMod
         setEndTime(newEndTime);
         video.currentTime = newEndTime;
         setSliderTime(newEndTime);
-
-
 
     };
 
@@ -150,7 +145,7 @@ const SubtitleForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seekMod
                 newEndTime = Math.max(startTime, parseFloat(endTime) - 1); // Decrement by 1 second, ensuring it doesn't go below startTime
                 break;
             case 'milliseconds':
-                newEndTime = Math.max(startTime, parseFloat(endTime) - 0.01); // Decrement by 0.1 second (100 milliseconds), ensuring it doesn't go below startTime
+                newEndTime = Math.max(startTime, parseFloat(endTime) - 0.1); // Decrement by 0.1 second (100 milliseconds), ensuring it doesn't go below startTime
                 break;
             default:
                 break;

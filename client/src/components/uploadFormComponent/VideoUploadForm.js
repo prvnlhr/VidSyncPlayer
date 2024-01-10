@@ -48,16 +48,7 @@ const VideoUploadForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seek
     };
 
 
-    /*
-    When play/pause btn is clicked it add timeupdate event listner to range slider 
-    because isPlaying is in useEffect dep. array.
-
-    But let say without playing the video if change the start and end time from input
-    it does not change range input values because be has not added event listner
-*/
-
     useEffect(() => {
-
         const video = videoRef.current;
         if (video) {
             const handleTimeUpdate = () => {
@@ -72,30 +63,7 @@ const VideoUploadForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seek
         }
     }, [isPlaying, videoRef]);
 
-    const [imgFile, setImgFile] = useState();
-    const [previewImg, setPreviewImg] = useState("");
 
-    const previewFile = (file) => {
-        const reader = new FileReader();
-        if (file) {
-            reader.readAsDataURL(file);
-        }
-        reader.onloadend = () => {
-            setPreviewImg(reader.result);
-        };
-    };
-    // const handleChange = (e) => {
-    //     const file = e.target.files[0];
-    //     setImgFile(file);
-    //     previewFile(file);
-    // };
-
-    // const handleUpload = () => {
-    //     const data = new FormData();
-    //     data.append("imageTitle", 'This is sample img title');
-    //     data.append("imageFile", imgFile);
-    //     uploadFormData(data);
-    // }
 
 
 
@@ -114,14 +82,11 @@ const VideoUploadForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seek
                                         <div className={styles.vidPreviewSubtitleContainer}>
                                             <video
                                                 className={styles.previewVideoTag}
-                                                controls
                                                 crossOrigin='anonymous'
                                                 ref={videoRef}
                                                 onTimeUpdate={seekMode ? handleSeek : null}
                                                 onMouseEnter={() => setSeekMode(true)}>
                                                 <source src={selectedVideo} type="video/mp4" />
-                                                <track kind="subtitles" src={subfile} srcLang="en" label="English" defaults />
-
                                                 Your browser does not support the video tag.
                                             </video>
 
