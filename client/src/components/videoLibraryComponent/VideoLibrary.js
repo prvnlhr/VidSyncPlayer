@@ -2,11 +2,14 @@ import React from 'react'
 import styles from "./styles/videoLibraryStyles.module.css";
 import VideoComponent from '../videoComponent/VideoComponent';
 import { useSelector } from 'react-redux';
+import Skeleton from '../videoComponent/Skeleton';
 
 const VideoLibrary = ({ currentPlayerVideoData, setCurrentPlayerVideoData }) => {
 
 
     const videoList = useSelector((state) => state.videos.videosData) || [];
+    const videoState = useSelector((state) => state.videos);
+    const { isLoading, action } = videoState;
 
     return (
         <div className={styles.libraryComponentWrapper}>
@@ -15,10 +18,18 @@ const VideoLibrary = ({ currentPlayerVideoData, setCurrentPlayerVideoData }) => 
                 <p className={styles.headerText2}>vidoes</p>
             </div>
             <div className={styles.videoLibraryContentWrapper}>
+                {
+                    isLoading && action === 'fetching' ? (
 
-                {videoList.map((video) => (
-                    <VideoComponent videoData={video} currentPlayerVideoData={currentPlayerVideoData} setCurrentPlayerVideoData={setCurrentPlayerVideoData} />
-                ))}
+                        <Skeleton />
+                    ) : (
+                        videoList.map((video) => (
+                            <>
+                                <VideoComponent videoData={video} currentPlayerVideoData={currentPlayerVideoData} setCurrentPlayerVideoData={setCurrentPlayerVideoData} />
+                            </>
+                        )))
+
+                }
             </div>
         </div>
     )

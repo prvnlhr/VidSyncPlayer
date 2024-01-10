@@ -181,139 +181,6 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
 
     };
 
-    const sampleSubtitles = [
-        {
-            startTime: {
-                minutes: 0,
-                seconds: 5,
-                milliseconds: 500,
-            },
-            endTime: {
-                minutes: 0,
-                seconds: 10,
-                milliseconds: 800,
-            },
-            text: "Welcome to the world of subtitles.",
-        },
-        {
-            startTime: {
-                minutes: 0,
-                seconds: 15,
-                milliseconds: 200,
-            },
-            endTime: {
-                minutes: 0,
-                seconds: 20,
-                milliseconds: 400,
-            },
-            text: "Explore the beauty of nature.",
-        },
-        {
-            startTime: {
-                minutes: 0,
-                seconds: 25,
-                milliseconds: 600,
-            },
-            endTime: {
-                minutes: 0,
-                seconds: 30,
-                milliseconds: 300,
-            },
-            text: "Learn and grow every day.",
-        },
-        {
-            startTime: {
-                minutes: 0,
-                seconds: 35,
-                milliseconds: 150,
-            },
-            endTime: {
-                minutes: 0,
-                seconds: 40,
-                milliseconds: 700,
-            },
-            text: "Embrace the journey of life.",
-        },
-        {
-            startTime: {
-                minutes: 0,
-                seconds: 45,
-                milliseconds: 400,
-            },
-            endTime: {
-                minutes: 0,
-                seconds: 50,
-                milliseconds: 100,
-            },
-            text: "Dance like nobody is watching.",
-        },
-        {
-            startTime: {
-                minutes: 0,
-                seconds: 55,
-                milliseconds: 800,
-            },
-            endTime: {
-                minutes: 1,
-                seconds: 0,
-                milliseconds: 250,
-            },
-            text: "Smile, it's contagious.",
-        },
-        {
-            startTime: {
-                minutes: 1,
-                seconds: 5,
-                milliseconds: 300,
-            },
-            endTime: {
-                minutes: 1,
-                seconds: 10,
-                milliseconds: 600,
-            },
-            text: "In the middle of difficulty lies opportunity.",
-        },
-        {
-            startTime: {
-                minutes: 1,
-                seconds: 15,
-                milliseconds: 750,
-            },
-            endTime: {
-                minutes: 1,
-                seconds: 20,
-                milliseconds: 50,
-            },
-            text: "Create your own sunshine.",
-        },
-        {
-            startTime: {
-                minutes: 1,
-                seconds: 25,
-                milliseconds: 500,
-            },
-            endTime: {
-                minutes: 1,
-                seconds: 30,
-                milliseconds: 200,
-            },
-            text: "Believe in yourself.",
-        },
-        {
-            startTime: {
-                minutes: 1,
-                seconds: 35,
-                milliseconds: 900,
-            },
-            endTime: {
-                minutes: 1,
-                seconds: 40,
-                milliseconds: 350,
-            },
-            text: "You are capable of amazing things.",
-        },
-        // Add more subtitle objects as needed
-    ];
 
 
     return (
@@ -482,7 +349,6 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
                         <p>Added Subtitles</p>
                     </div>
 
-
                     <div className={styles.addedSubsListWrapper}>
                         {subtitles.length > 0 ? (
                             subtitles.map((subtitle, index) => (
@@ -504,21 +370,7 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
                             ))
                         ) : (
                             <p className={styles.noSubMessageText}> • Add subtitles to show</p>
-                            // <div
-                            //     className={styles.addListItemWrapper}
-                            //  >
-                            //     <div className={styles.startTimeStampDiv}>
-                            //         <p>{`${`01`}: ${`02`}:${`23`}`}</p>
-                            //     </div>
-                            //     <div className={styles.endTimeStampDiv}>
-                            //         <p>{`${`02`}: ${`15`}:${`48`}`}</p>
-                            //     </div>
-                            //     <div className={styles.subtitleTextDiv}>
-                            //         <div className={styles.subtitleTextInnerDiv}>
-                            //             <p className={styles.subtitleText}> {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`}</p>
-                            //         </div>
-                            //     </div>
-                            // </div>
+
                         )}
                     </div>
 
@@ -533,3 +385,19 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
 export default SubtitleForm
 
 
+
+// <div
+//     className={styles.addListItemWrapper}
+//  >
+//     <div className={styles.startTimeStampDiv}>
+//         <p>{`${`01`}: ${`02`}:${`23`}`}</p>
+//     </div>
+//     <div className={styles.endTimeStampDiv}>
+//         <p>{`${`02`}: ${`15`}:${`48`}`}</p>
+//     </div>
+//     <div className={styles.subtitleTextDiv}>
+//         <div className={styles.subtitleTextInnerDiv}>
+//             <p className={styles.subtitleText}> {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`}</p>
+//         </div>
+//     </div>
+// </div>

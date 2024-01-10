@@ -65,7 +65,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    background-color: skyblue;
+    /* background-color: skyblue; */
 }
 
 .titleWrapper p {
@@ -75,7 +75,8 @@
     font-weight: 500;
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+@media only screen and (max-width: 600px) {
+
     .playerWrapper {
         grid-area: playerWrapper;
         width: 100%;

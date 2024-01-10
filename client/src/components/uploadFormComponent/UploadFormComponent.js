@@ -23,6 +23,8 @@ const UploadFormComponent = () => {
 
     const videoRef = useRef(null);
 
+    const [formError, setFormError] = useState('');
+
     const [startTime, setStartTime] = useState(0);
     const [endTime, setEndTime] = useState(0.01);
 
@@ -94,7 +96,16 @@ const UploadFormComponent = () => {
     };
 
 
+
+
+
     const handleFormSubmit = () => {
+
+        if (!videoTitle) {
+            setFormError('Title is required');
+            return;
+        }
+
         const vttContent = generateWebVTT();
         const formData = new FormData();
 
@@ -103,10 +114,9 @@ const UploadFormComponent = () => {
         formData.append('subtitleFile', new Blob([vttContent], { type: 'text/vtt' }), 'subtitles.vtt');
 
         dispatch(uploadVideoData(formData));
-        // uploadFormData(formData);
+        console.log('Check');
+        // navigate("/player");
     };
-
-
 
 
 
@@ -118,33 +128,48 @@ const UploadFormComponent = () => {
                 <button className={styles.backBtn} type='button' onClick={() => navigate('/')}>
                     <Icon className={styles.backBtIcon} icon="bi:arrow-up" rotate={3} />
                 </button>
+
+                {selectedVideo &&
+                    <div className={styles.submitBtnContainer} >
+                        <button className={styles.submitBtn}
+                            onClick={handleFormSubmit}
+                            type='button'>
+                            {(isLoading && action === 'uploading')
+                                ?
+                                <p>Uploding</p>
+                                :
+                                <p>Upload</p>
+                            }
+                        </button>
+                    </div>
+                }
             </div>
 
             <div className={styles.uploadComponentInnerWrapper}>
-
-                <VideoUploadForm videoRef={videoRef} handleSeek={handleSeek} updateShowSubTitleOverlay={updateShowSubTitleOverlay} seekMode={seekMode} setSeekMode={setSeekMode} showActiveSubtitle={showActiveSubtitle} setShowActiveSubtitle={setShowActiveSubtitle} setStartTime={setStartTime} startTime={startTime} setEndTime={setEndTime} endTime={endTime} subtitles={subtitles} setSubtitles={setSubtitles} selectedVideo={selectedVideo} setSelectedVideo={setSelectedVideo} videoTitle={videoTitle} setVideoTitle={setVideoTitle} setSliderTime={setSliderTime} sliderTime={sliderTime} setVideoFile={setVideoFile} videoFile={videoFile} />
+                <VideoUploadForm formError={formError} videoRef={videoRef} handleSeek={handleSeek} updateShowSubTitleOverlay={updateShowSubTitleOverlay} seekMode={seekMode} setSeekMode={setSeekMode} showActiveSubtitle={showActiveSubtitle} setShowActiveSubtitle={setShowActiveSubtitle} setStartTime={setStartTime} startTime={startTime} setEndTime={setEndTime} endTime={endTime} subtitles={subtitles} setSubtitles={setSubtitles} selectedVideo={selectedVideo} setSelectedVideo={setSelectedVideo} videoTitle={videoTitle} setVideoTitle={setVideoTitle} setSliderTime={setSliderTime} sliderTime={sliderTime} setVideoFile={setVideoFile} videoFile={videoFile} />
                 <SubtitleForm videoRef={videoRef} handleSeek={handleSeek} updateShowSubTitleOverlay={updateShowSubTitleOverlay} seekMode={seekMode} setSeekMode={setSeekMode} showActiveSubtitle={showActiveSubtitle} setShowActiveSubtitle={setShowActiveSubtitle} setStartTime={setStartTime} startTime={startTime} setEndTime={setEndTime} endTime={endTime} subtitles={subtitles} setSubtitles={setSubtitles} selectedVideo={selectedVideo} setSliderTime={setSliderTime} sliderTime={sliderTime} />
-                <div className={styles.submitBtnWrapper}>
-                    {selectedVideo &&
-                        <>
-                            <button className={styles.submitBtn}
-                                onClick={handleFormSubmit}
-                                type='button'>
-                                {(isLoading && action === 'uploading')
-                                    ?
-                                    <p>Uploding</p>
-                                    :
-                                    <p>Upload</p>
-                                }
-                            </button>
-
-                        </>
-                    }
-                </div>
-
             </div>
         </div>
     );
 };
 
 export default UploadFormComponent;
+
+
+{/* <div className={styles.submitBtnWrapper}>
+{selectedVideo &&
+    <>
+        <button className={styles.submitBtn}
+            onClick={handleFormSubmit}
+            type='button'>
+            {(isLoading && action === 'uploading')
+                ?
+                <p>Uploding</p>
+                :
+                <p>Upload</p>
+            }
+        </button>
+
+    </>
+}
+</div> */}
