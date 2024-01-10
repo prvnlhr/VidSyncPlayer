@@ -26,29 +26,24 @@ const VideoPlayerPage = ({ currentPlayerVideoData, setCurrentPlayerVideoData }) 
             <div className={playerStyles.playerWrapper}>
                 <div className={playerStyles.playerContainer}>
                     <div className={playerStyles.videoWrapper}>
-                        <ReactPlayer
-                            url={currentPlayerVideoData.videoUrl}
+
+                        <video
+                            className={` ${playerStyles.playerVideoTag}`}
+                            crossOrigin="anonymous"
                             controls
-                            playing
-                            width="100%"
-                            height="100%"
-                            config={{
-                                file: {
-                                    tracks: [
-                                        {
-                                            kind: 'metadata',
-                                            src: currentPlayerVideoData.subtitleUrl,
-                                            srcLang: 'en',
-                                            default: true,
-                                        },
-                                    ],
-                                },
-                            }}
-                        />
+                            autoPlay
+                            ref={videoRef}>
+                            <source src={currentPlayerVideoData.videoUrl} type="video/mp4" />
+                            <track default kind="metadata" type="text/vtt" src={currentPlayerVideoData.subtitleUrl} />
+                        </video>
                     </div>
                     <div className={playerStyles.titleWrapper}>
                         <p>{currentPlayerVideoData.videoTitle}</p>
                     </div>
+                    {/* <div className={playerStyles.subtitleOverlay}>
+                        <p>sample subtitle</p>
+                    </div> */}
+
                 </div>
             </div>
         );
