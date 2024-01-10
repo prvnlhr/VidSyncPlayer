@@ -5,9 +5,7 @@ import pageHeaderStyles from "./styles/pageHeaderStyles.module.css";
 import NextVideosList from "./NextVideosList";
 import { useNavigate } from "react-router-dom";
 import { Icon } from '@iconify/react';
-import subfilevtt from "./subfile.vtt";
-import ReactPlayer from 'react-player';
-import Subtitles from 'react-subtitles';
+
 
 
 const VideoPlayerPage = ({ currentPlayerVideoData, setCurrentPlayerVideoData }) => {
