@@ -21,10 +21,9 @@ const VideoPlayerPage = ({ currentPlayerVideoData, setCurrentPlayerVideoData }) 
                 <div className={playerStyles.playerContainer}>
                     <div className={playerStyles.videoWrapper}>
                         <video className={playerStyles.playerVideoTag}
-                            // crossorigin="anonymous"
+                            crossOrigin="anonymous"
                             controls
-                            autoPlay
-                        >
+                            autoPlay>
                             <source src={currentPlayerVideoData.videoUrl} type="video/mp4" />
                             <track kind="subtitles" src={currentPlayerVideoData.subtitleUrl} srcLang="en" label="English" defaults />
                         </video>

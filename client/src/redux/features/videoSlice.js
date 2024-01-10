@@ -24,9 +24,14 @@ export const fetchVideosData = createAsyncThunk("vidoes/fetch", async (_, { getS
 export const uploadVideoData = createAsyncThunk("vidoes/upload", async (formData, { getState, dispatch, rejectWithValue, fulfillWithValue }) => {
 
     try {
+        console.log(formData);
+        formData.forEach((value, key) => {
+            console.log(key, value);
+        });
         const res = await api.postFormData(formData);
         console.log(res.data);
         return fulfillWithValue(res.data);
+        // return fulfillWithValue([]);
     } catch (error) {
         return rejectWithValue(error);
     }

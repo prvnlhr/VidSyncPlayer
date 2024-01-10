@@ -50,8 +50,8 @@ const videoController = {
             // Upload subtitle file
             const subtitleData = await uploadFileToS3(subtitleFile, `subtitles/${videoTitle}.vtt`, 'text/vtt');
 
-            console.log('Video Upload Result:', videoData);
-            console.log('Subtitle Upload Result:', subtitleData);
+            // console.log('Video Upload Result:', videoData);
+            // console.log('Subtitle Upload Result:', subtitleData);
 
             const videoDetails = await VideoDB.create({
                 videoTitle: videoTitle,
@@ -62,7 +62,7 @@ const videoController = {
             console.log('MongoDB Response:', videoDetails);
 
 
-            res.status(200).json({ success: 'Success uploading' });
+            res.status(200).json(videoDetails);
         } catch (error) {
             console.error(error.message);
             res.status(500).json({ error: 'Internal Server Error' });

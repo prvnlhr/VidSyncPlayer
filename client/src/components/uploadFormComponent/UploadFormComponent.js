@@ -7,11 +7,19 @@ import { uploadFormData } from "../../services/apiServices";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import { useSelector, useDispatch } from 'react-redux'
+import { uploadVideoData } from "../../redux/features/videoSlice"
 
 const UploadFormComponent = () => {
 
     const navigate = useNavigate();
 
+    const videosState = useSelector((state) => state.videos);
+
+    const { isLoading, action } = videosState;
+
+
+    const dispatch = useDispatch();
 
     const videoRef = useRef(null);
 
@@ -94,8 +102,8 @@ const UploadFormComponent = () => {
         formData.append('videoFile', videoFile);
         formData.append('subtitleFile', new Blob([vttContent], { type: 'text/vtt' }), 'subtitles.vtt');
 
-
-        uploadFormData(formData);
+        dispatch(uploadVideoData(formData));
+        // uploadFormData(formData);
     };
 
 
@@ -122,11 +130,14 @@ const UploadFormComponent = () => {
                             <button className={styles.submitBtn}
                                 onClick={handleFormSubmit}
                                 type='button'>
-                                <p>Upload</p>
+                                {(isLoading && action === 'uploading')
+                                    ?
+                                    <p>Uploding</p>
+                                    :
+                                    <p>Upload</p>
+                                }
                             </button>
-                            {/* <button className={styles.cancelBtn} type='button'>
-                                <p>Cancel</p>
-                            </button> */}
+
                         </>
                     }
                 </div>
