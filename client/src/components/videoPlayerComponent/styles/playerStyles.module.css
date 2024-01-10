@@ -10,26 +10,46 @@
 }
 
 .playerContainer {
+    position: relative;
     width: 80%;
     /* height: 60%; */
     aspect-ratio: 16/10;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     /* border: 1px solid blue; */
     margin-top: 5%;
+    /* background-color: red; */
 }
 
 
 .videoWrapper {
     width: 100%;
     height: 80%;
-    /* border: 1px solid green; */
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(105, 90, 205, 0.118);
+    /* background-color: rgba(105, 90, 205, 0.118);  */
+    /* background-color: salmon; */
+}
+
+.subtitleOverlay {
+    position: absolute;
+    width: auto;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.846);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 3px;
+}
+
+.subtitleOverlay p {
+    font-family: 'Poppins';
+    font-size: 0.8rem;
 }
 
 .playerVideoTag {
@@ -45,6 +65,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    background-color: skyblue;
 }
 
 .titleWrapper p {

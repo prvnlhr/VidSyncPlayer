@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Icon } from '@iconify/react';
 import styles from "./styles/videoUploadFormStyles.module.css";
 import { uploadFormData } from "../../services/apiServices";
-
+import subfile from "./subvtt.vtt"
 
 const VideoUploadForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seekMode, setSeekMode, showActiveSubtitle, setShowActiveSubtitle, setStartTime, startTime, setEndTime, endTime, subtitles, setSubtitles, selectedVideo, setSelectedVideo, videoTitle, setVideoTitle, setSliderTime, sliderTime, setVideoFile, videoFile }) => {
 
@@ -114,10 +114,14 @@ const VideoUploadForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seek
                                         <div className={styles.vidPreviewSubtitleContainer}>
                                             <video
                                                 className={styles.previewVideoTag}
+                                                controls
+                                                crossOrigin='anonymous'
                                                 ref={videoRef}
                                                 onTimeUpdate={seekMode ? handleSeek : null}
                                                 onMouseEnter={() => setSeekMode(true)}>
                                                 <source src={selectedVideo} type="video/mp4" />
+                                                <track kind="subtitles" src={subfile} srcLang="en" label="English" defaults />
+
                                                 Your browser does not support the video tag.
                                             </video>
 

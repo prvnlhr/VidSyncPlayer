@@ -8,11 +8,7 @@ const API = axios.create({
 
 
 export const postFormData = (formData) =>
-    API.post("/video/upload", formData, {
-        headers: {
-            "Content-Type": "multipart/form-data", // Important for FormData
-        },
-    });
+    API.post("/video/upload", formData);
 
 export const getAllVideos = () =>
     API.get("/video/getVideos");
