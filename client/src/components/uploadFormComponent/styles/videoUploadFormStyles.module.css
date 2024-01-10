@@ -1,6 +1,5 @@
-/* p------------------------- */
-.videoUploadWrapper {
-    grid-area: videoUploadWrapper;
+.vidComponentOuterWrapper {
+    grid-area: vidComponentOuterWrapper;
     width: 100%;
     height: 100%;
     /* border: 1px solid red; */
@@ -9,7 +8,7 @@
     align-items: center;
 }
 
-.videoUploadInnerWrapper {
+.vidComponentInnerWrapper {
     width: 90%;
     height: 90%;
     /* border: 1px solid green; */
@@ -17,9 +16,10 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    /* background-color: red; */
 }
 
-.videoSelectPreviewWrapper {
+.vidLabelAndControlContainer {
     width: 100%;
     height: 60%;
     /* border: 1px solid red; */
@@ -27,9 +27,10 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    /* background-color: red; */
 }
 
-.selectPreviewContainer {
+.vidLabelInputContainer {
     width: 100%;
     height: 80%;
     /* border: 1px solid red; */
@@ -38,14 +39,17 @@
     align-items: center;
 }
 
-/* -------------------- */
-.controlsContainer {
+/* |> VIDEO CONTROLS STYLES-------------------- */
+
+.vidControlContainer {
     width: 100%;
     height: 20%;
-    /* border: 1px solid red; */
+    /* border: 1px solid green; */
     display: flex;
     justify-content: center;
     align-items: center;
+    /* background-color: green; */
+    /* background-color: salmon; */
 }
 
 .controlsInnerContainer {
@@ -82,7 +86,7 @@
 
 .rangeInputSlider {
     width: 100%;
-    height: 2px;
+    height: 1px;
     cursor: pointer;
     outline: none;
     border-radius: 16px;
@@ -91,8 +95,7 @@
 
 
 
-/* ----------------------------- */
-
+/* |> LABEL TAG IS PARENT WITH  VIDEO-PREVIEW AND INPUT-ELEMENT AS CHILD ----------------------------- */
 
 .videoLabelTag {
     position: relative;
@@ -113,28 +116,30 @@
     -ms-user-select: none;
     user-select: none;
     padding: 0;
+    /* background-color: red; */
 }
 
+
+/* --------------------------------------------------------------------------- */
+/* ! NO CHANGES HERE TO BE MADE : INPUT KEPT DISPLAY NONE */
 .videoInputTag {
+    display: none;
     border: none;
     outline: none;
     background: none;
     width: 100%;
     height: 10%;
-    /* width:90%; */
-    /* border: 1px solid black; */
-    display: none;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     border: 1px solid black;
-    /* height: 30px !important; */
     margin: 0px 0px 0px 0px;
     font-family: "Poppins", sans-serif;
     color: black;
     font-weight: 650;
     letter-spacing: 0.2px;
     cursor: pointer;
+
 }
 
 .videoInputTag::-webkit-file-upload-button {
@@ -148,7 +153,9 @@
     background-color: #dae5eb;
 }
 
-/* ---------- */
+/* --------------------------------------------------------------------------------------- */
+
+/*  |> UPLOAD CONTAINER - DASHED LINE AREA --------------------------------------- */
 
 .uploadContainer {
     position: relative;
@@ -203,22 +210,21 @@
     font-size: 11px;
 }
 
-
-.videoPreviewContainer {
+/* |> SELECTED VIDEO PREVIEW STYLES------------------------------------------------- */
+.vidPreviewSubtitleContainer {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 89%;
     display: flex;
     justify-content: center;
     align-items: center;
     /* background-color: red; */
-    /* border: 1px solid red; */
     flex-direction: column;
     justify-content: space-between;
 }
 
 .previewVideoTag {
-    height: 89%;
+    height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -226,9 +232,9 @@
 }
 
 
-/* --------------------------------------------------------- */
+/* |> VIDEO TITLE INPUT STYLES--------------------------------------------------------- */
 
-.videoTitleInputWrapper {
+.vidTitleInputOuterWrapper {
     width: 100%;
     height: 40%;
     /* border: 1px solid green; */
@@ -236,7 +242,6 @@
     justify-content: center;
     align-items: flex-start;
 }
-
 
 
 .vidTitleInputContainer {
@@ -255,10 +260,8 @@
 }
 
 .focusFieldStyle {
-    border: 2px solid var(--ui-scheme-color);
+    /* border: 2px solid var(--ui-scheme-color); */
 }
-
-
 
 .labelWrapper {
     grid-area: labelWrapper;
@@ -290,7 +293,6 @@
     padding-left: 5%;
 }
 
-
 .inputField {
     display: flex;
     text-align: start;
@@ -314,9 +316,7 @@
     /* border: 2px solid #7F56D9; */
 }
 
-
-/* -------------------------- */
-
+/* |> SUBTITLE OVERLAY STYLES--------------------------------------------------------------------- */
 .subTitleOverlayDiv {
     position: relative;
     width: auto;
@@ -343,5 +343,131 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+
+    .vidComponentInnerWrapper {
+        width: 90%;
+        height: 90%;
+        /* border: 1px solid green; */
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+    }
+
+
+    .vidLabelAndControlContainer {
+        width: 100%;
+        height: 75%;
+        /* border: 1px solid red; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        /* background-color: lightgreen; */
+    }
+
+    .vidLabelInputContainer {
+        width: 100%;
+        height: 85%;
+        /* height: unset; */
+        /* aspect-ratio: 16/9; */
+        /* border: 1px solid red; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background-color: skyblue; */
+    }
+
+    .vidPreviewSubtitleContainer {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        /* background-color: red; */
+        flex-direction: column;
+    }
+
+    .previewVideoTag {
+        height: 85%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .subTitleOverlayDiv {
+        position: relative;
+        width: auto;
+        max-width: 95%;
+        height: 10%;
+        background-color: rgba(64, 62, 62, 0.447);
+        margin-top: 1%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+    }
+
+
+
+    .vidControlContainer {
+        width: 100%;
+        height: 15%;
+        /* border: 1px solid green; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background-color: green; */
+        /* background-color: salmon; */
+    }
+
+    .controlsInnerContainer {
+        width: 80%;
+        height: 80%;
+        /* border: 1px solid black; */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    /* --------------------------------------- */
+
+    .vidTitleInputOuterWrapper {
+        position: relative;
+        width: 100%;
+        height: 25%;
+        min-height: 25%;
+        /* border: 1px solid green; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background-color: salmon; */
+    }
+
+    .vidTitleInputContainer {
+        position: relative;
+        width: 90%;
+        height: 80%;
+        display: grid;
+        grid-template-rows: 50% 50%;
+        grid-template-columns: 100%;
+        grid-template-areas:
+            "labelWrapper"
+            "inputWrapper";
+        background-color: #F3F5F9;
+        border-radius: 15px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+
+
 
 }

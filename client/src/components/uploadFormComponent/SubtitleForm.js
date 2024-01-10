@@ -324,199 +324,212 @@ const SubtitleForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seekMod
     return (
         <div className={styles.subtitleInputWrapper}>
 
-            <div className={styles.formGridWrapper}>
+            <div className={styles.subtitleInputInnerWrapper} >
 
-                <div className={styles.startTimeWrapper}>
-                    <div className={styles.startTimeContainer}>
+                <div className={styles.timeSubInputFormWrapper}>
+                    <div className={styles.startTimeWrapper}>
+                        <div className={styles.startTimeContainer}>
 
-                        <div className={styles.labelWrapper}>
-                            <p style={{ color: selectedVideo ? '#7F56D9' : '#98A2B3' }}>START TIME</p>
-                        </div>
-                        <div className={styles.inputWrapper}>
-                            <div className={`${styles.timeWrapper} ${styles.minWrapper}`}>
-                                <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleStarTimeIncrement('minutes')}>
-                                    <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
-                                </button>
-                                <input
-                                    style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
-                                    disabled={selectedVideo ? false : true}
-                                    className={`${styles.timeInput}`}
-                                    value={formatTime(startTime).minutes}
-                                    onChange={(e) =>
-                                        setStartTime((parseFloat(e.target.value) * 60) + parseFloat(formatTime(startTime).seconds) + (parseFloat(formatTime(startTime).milliseconds) / 1000))
-                                    }
-                                />
-                                <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleStarTimeDecrement('minutes')}>
-                                    <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={2} />
-                                </button>
+                            <div className={styles.labelWrapper}>
+                                <p style={{ color: selectedVideo ? '#7F56D9' : '#98A2B3' }}>START TIME</p>
                             </div>
-
-                            <div className={`${styles.timeWrapper} ${styles.secWrapper}`}>
-                                <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleStarTimeIncrement('seconds')}>
-                                    <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
-                                </button>
-                                <input
-                                    style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
-                                    disabled={selectedVideo ? false : true}
-                                    className={`${styles.timeInput}`}
-                                    value={formatTime(startTime).seconds}
-                                    onChange={(e) =>
-                                        setStartTime((parseFloat(formatTime(startTime).minutes) * 60) + parseFloat(e.target.value) + (parseFloat(formatTime(startTime).milliseconds) / 1000))
-                                    }
-                                />
-                                <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleStarTimeDecrement('seconds')}>
-                                    <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={2} />
-                                </button>
-                            </div>
-
-                            <div className={`${styles.timeWrapper} ${styles.milliSecWrapper}`}>
-                                <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleStarTimeIncrement('milliseconds')}>
-                                    <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
-                                </button>
-                                <input
-                                    style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
-                                    className={` ${styles.timeInput}`}
-                                    value={formatTime(startTime).milliseconds}
-                                    onChange={(e) =>
-                                        setStartTime((parseFloat(formatTime(startTime).minutes) * 60) + parseFloat(e.target.value) + (parseFloat(formatTime(startTime).milliseconds) / 1000))
-                                    }
-                                />
-                                <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleStarTimeDecrement('milliseconds')}>
-                                    <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={2} />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={styles.endTimeWrapper}>
-                    <div className={styles.endTimeContainer}>
-                        <div className={styles.labelWrapper}>
-                            <p style={{ color: selectedVideo ? '#7F56D9' : '#98A2B3' }}>END TIME</p>
-                        </div>
-                        <div className={styles.inputWrapper}>
-                            <div className={`${styles.timeWrapper} ${styles.minWrapper}`}>
-                                <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleIncrementEndTime('minutes')}>
-                                    <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
-                                </button>
-                                <input
-                                    style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
-                                    disabled={selectedVideo ? false : true}
-                                    className={`${styles.timeInput}`}
-                                    value={formatTime(endTime).minutes}
-                                    onChange={(e) =>
-                                        setStartTime((parseFloat(e.target.value) * 60) + parseFloat(formatTime(endTime).seconds) + (parseFloat(formatTime(endTime).milliseconds) / 1000))
-                                    }
-                                />
-                                <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleDecrementEndTime('minutes')}>
-                                    <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={2} />
-                                </button>
-                            </div>
-
-                            <div className={`${styles.timeWrapper} ${styles.secWrapper}`}>
-                                <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleIncrementEndTime('seconds')}>
-                                    <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
-                                </button>
-                                <input
-                                    style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
-                                    disabled={selectedVideo ? false : true}
-                                    className={`${styles.timeInput}`}
-                                    value={formatTime(endTime).seconds}
-                                    onChange={(e) =>
-                                        setStartTime((parseFloat(formatTime(endTime).minutes) * 60) + parseFloat(e.target.value) + (parseFloat(formatTime(endTime).milliseconds) / 1000))
-                                    }
-                                />
-                                <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleDecrementEndTime('seconds')}>
-                                    <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={2} />
-                                </button>
-                            </div>
-
-                            <div className={`${styles.timeWrapper} ${styles.milliSecWrapper}`}>
-                                <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleIncrementEndTime('milliseconds')}>
-                                    <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
-                                </button>
-                                <input
-                                    style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
-                                    disabled={selectedVideo ? false : true}
-                                    className={` ${styles.timeInput}`}
-                                    value={formatTime(endTime).milliseconds}
-                                    onChange={(e) =>
-                                        setStartTime((parseFloat(formatTime(endTime).minutes) * 60) + parseFloat(e.target.value) + (parseFloat(formatTime(endTime).milliseconds) / 1000))
-                                    }
-                                />
-                                <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleDecrementEndTime('milliseconds')}>
-                                    <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={2} />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={styles.subtitleTextInputWrapper}>
-                    <div className={styles.subtitleTextInputContainer}>
-                        <div className={styles.labelWrapper}>
-                            <p style={{ color: selectedVideo ? '#7F56D9' : '#98A2B3' }}>SUBTITLE TEXT</p>
-                        </div>
-                        <div className={styles.subInputWrapper}>
-                            <input
-                                style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
-                                disabled={selectedVideo ? false : true}
-                                className={styles.subtitleTextInput}
-                                value={subtitleText}
-                                onChange={handleSubtitleTextChange}
-                            />
-                        </div>
-                        <div className={styles.addBtnWrapper}>
-                            {subtitleText.length !== 0 &&
-                                <button type='button' className={styles.addBtn} onClick={handleAddSubtitle}>
-                                    <Icon className={styles.addBtnIcon} icon="radix-icons:arrow-up" rotate={1} />
-                                </button >
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            <div className={styles.subtitleList}>
-
-
-                <div className={styles.sublistHeader}>
-                    <p>Added Subtitles</p>
-                </div>
-
-
-                <div className={styles.subList}>
-                    {subtitles.length > 0 ? (
-                        subtitles.map((subtitle, index) => (
-                            <div
-                                className={styles.addedSubtitleWrapper}
-                                onClick={() => handleListSubtitleClicked(subtitle)}
-                            >
-                                <div className={styles.startTimeStampDiv}>
-                                    <p>{`${subtitle.startTime.minutes}: ${subtitle.startTime.seconds}:${subtitle.startTime.milliseconds}`}</p>
+                            <div className={styles.inputWrapper}>
+                                <div className={`${styles.timeWrapper} ${styles.minWrapper}`}>
+                                    <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleStarTimeIncrement('minutes')}>
+                                        <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
+                                    </button>
+                                    <input
+                                        style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
+                                        disabled={selectedVideo ? false : true}
+                                        className={`${styles.timeInput}`}
+                                        value={formatTime(startTime).minutes}
+                                        onChange={(e) =>
+                                            setStartTime((parseFloat(e.target.value) * 60) + parseFloat(formatTime(startTime).seconds) + (parseFloat(formatTime(startTime).milliseconds) / 1000))
+                                        }
+                                    />
+                                    <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleStarTimeDecrement('minutes')}>
+                                        <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={2} />
+                                    </button>
                                 </div>
-                                <div className={styles.endTimeStampDiv}>
-                                    <p>{`${subtitle.endTime.minutes}: ${subtitle.endTime.seconds}:${subtitle.endTime.milliseconds}`}</p>
+
+                                <div className={`${styles.timeWrapper} ${styles.secWrapper}`}>
+                                    <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleStarTimeIncrement('seconds')}>
+                                        <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
+                                    </button>
+                                    <input
+                                        style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
+                                        disabled={selectedVideo ? false : true}
+                                        className={`${styles.timeInput}`}
+                                        value={formatTime(startTime).seconds}
+                                        onChange={(e) =>
+                                            setStartTime((parseFloat(formatTime(startTime).minutes) * 60) + parseFloat(e.target.value) + (parseFloat(formatTime(startTime).milliseconds) / 1000))
+                                        }
+                                    />
+                                    <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleStarTimeDecrement('seconds')}>
+                                        <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={2} />
+                                    </button>
                                 </div>
-                                <div className={styles.subtitleTextDiv}>
-                                    <div className={styles.subtitleTextInnerDiv}>
-                                        <div className={styles.subTitleTextIndicator}></div>
-                                        <p className={styles.subtitleText}> {subtitle.text}</p>
+
+                                <div className={`${styles.timeWrapper} ${styles.milliSecWrapper}`}>
+                                    <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleStarTimeIncrement('milliseconds')}>
+                                        <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
+                                    </button>
+                                    <input
+                                        style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
+                                        className={` ${styles.timeInput}`}
+                                        value={formatTime(startTime).milliseconds}
+                                        onChange={(e) =>
+                                            setStartTime((parseFloat(formatTime(startTime).minutes) * 60) + parseFloat(e.target.value) + (parseFloat(formatTime(startTime).milliseconds) / 1000))
+                                        }
+                                    />
+                                    <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleStarTimeDecrement('milliseconds')}>
+                                        <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={2} />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.endTimeWrapper}>
+                        <div className={styles.endTimeContainer}>
+                            <div className={styles.labelWrapper}>
+                                <p style={{ color: selectedVideo ? '#7F56D9' : '#98A2B3' }}>END TIME</p>
+                            </div>
+                            <div className={styles.inputWrapper}>
+                                <div className={`${styles.timeWrapper} ${styles.minWrapper}`}>
+                                    <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleIncrementEndTime('minutes')}>
+                                        <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
+                                    </button>
+                                    <input
+                                        style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
+                                        disabled={selectedVideo ? false : true}
+                                        className={`${styles.timeInput}`}
+                                        value={formatTime(endTime).minutes}
+                                        onChange={(e) =>
+                                            setStartTime((parseFloat(e.target.value) * 60) + parseFloat(formatTime(endTime).seconds) + (parseFloat(formatTime(endTime).milliseconds) / 1000))
+                                        }
+                                    />
+                                    <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleDecrementEndTime('minutes')}>
+                                        <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={2} />
+                                    </button>
+                                </div>
+
+                                <div className={`${styles.timeWrapper} ${styles.secWrapper}`}>
+                                    <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleIncrementEndTime('seconds')}>
+                                        <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
+                                    </button>
+                                    <input
+                                        style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
+                                        disabled={selectedVideo ? false : true}
+                                        className={`${styles.timeInput}`}
+                                        value={formatTime(endTime).seconds}
+                                        onChange={(e) =>
+                                            setStartTime((parseFloat(formatTime(endTime).minutes) * 60) + parseFloat(e.target.value) + (parseFloat(formatTime(endTime).milliseconds) / 1000))
+                                        }
+                                    />
+                                    <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleDecrementEndTime('seconds')}>
+                                        <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={2} />
+                                    </button>
+                                </div>
+
+                                <div className={`${styles.timeWrapper} ${styles.milliSecWrapper}`}>
+                                    <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleIncrementEndTime('milliseconds')}>
+                                        <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
+                                    </button>
+                                    <input
+                                        style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
+                                        disabled={selectedVideo ? false : true}
+                                        className={` ${styles.timeInput}`}
+                                        value={formatTime(endTime).milliseconds}
+                                        onChange={(e) =>
+                                            setStartTime((parseFloat(formatTime(endTime).minutes) * 60) + parseFloat(e.target.value) + (parseFloat(formatTime(endTime).milliseconds) / 1000))
+                                        }
+                                    />
+                                    <button disabled={selectedVideo ? false : true} className={styles.timeToggleBtn} onClick={() => handleDecrementEndTime('milliseconds')}>
+                                        <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={2} />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.subtitleTextInputWrapper}>
+                        <div className={styles.subtitleTextInputContainer}>
+                            <div className={styles.labelWrapper}>
+                                <p style={{ color: selectedVideo ? '#7F56D9' : '#98A2B3' }}>SUBTITLE TEXT</p>
+                            </div>
+                            <div className={styles.subInputWrapper}>
+                                <input
+                                    style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
+                                    disabled={selectedVideo ? false : true}
+                                    className={styles.subtitleTextInput}
+                                    value={subtitleText}
+                                    onChange={handleSubtitleTextChange}
+                                />
+                            </div>
+                            <div className={styles.addBtnWrapper}>
+                                {subtitleText.length !== 0 &&
+                                    <button type='button' className={styles.addBtn} onClick={handleAddSubtitle}>
+                                        <Icon className={styles.addBtnIcon} icon="radix-icons:arrow-up" rotate={1} />
+                                    </button >
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div className={styles.add_list_and_header_wrapper}>
+
+
+                    <div className={styles.addedListHeaderWraper}>
+                        <p>Added Subtitles</p>
+                    </div>
+
+
+                    <div className={styles.addedSubsListWrapper}>
+                        {subtitles.length > 0 ? (
+                            subtitles.map((subtitle, index) => (
+                                <div
+                                    className={styles.addListItemWrapper}
+                                    onClick={() => handleListSubtitleClicked(subtitle)}>
+                                    <div className={styles.startTimeStampDiv}>
+                                        <p>{`${subtitle.startTime.minutes}: ${subtitle.startTime.seconds}:${subtitle.startTime.milliseconds}`}</p>
+                                    </div>
+                                    <div className={styles.endTimeStampDiv}>
+                                        <p>{`${subtitle.endTime.minutes}: ${subtitle.endTime.seconds}:${subtitle.endTime.milliseconds}`}</p>
+                                    </div>
+                                    <div className={styles.subtitleTextDiv}>
+                                        <div className={styles.subtitleTextInnerDiv}>
+                                            <p className={styles.subtitleText}> {subtitle.text}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))
-                    ) : (
-                        <p className={styles.noSubMessageText}> • Add subtitles to show</p>
-                    )}
+                            ))
+                        ) : (
+                            <p className={styles.noSubMessageText}> • Add subtitles to show</p>
+                            // <div
+                            //     className={styles.addListItemWrapper}
+                            //  >
+                            //     <div className={styles.startTimeStampDiv}>
+                            //         <p>{`${`01`}: ${`02`}:${`23`}`}</p>
+                            //     </div>
+                            //     <div className={styles.endTimeStampDiv}>
+                            //         <p>{`${`02`}: ${`15`}:${`48`}`}</p>
+                            //     </div>
+                            //     <div className={styles.subtitleTextDiv}>
+                            //         <div className={styles.subtitleTextInnerDiv}>
+                            //             <p className={styles.subtitleText}> {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`}</p>
+                            //         </div>
+                            //     </div>
+                            // </div>
+                        )}
+                    </div>
+
+
                 </div>
-
-
             </div>
-
-
 
         </div >
     )

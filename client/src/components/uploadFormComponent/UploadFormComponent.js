@@ -5,8 +5,13 @@ import VideoUploadForm from "./VideoUploadForm";
 import SubtitleForm from "./SubtitleForm";
 import { uploadFormData } from "../../services/apiServices";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const UploadFormComponent = () => {
+
+    const navigate = useNavigate();
+
 
     const videoRef = useRef(null);
 
@@ -14,8 +19,6 @@ const UploadFormComponent = () => {
     const [endTime, setEndTime] = useState(0);
 
     const [sliderTime, setSliderTime] = useState(0);
-
-
 
     const [subtitles, setSubtitles] = useState([]);
     const [showActiveSubtitle, setShowActiveSubtitle] = useState(null);
@@ -99,13 +102,20 @@ const UploadFormComponent = () => {
 
 
 
+
     return (
         <div className={styles.uploadComponentWrapper}>
 
+            <div className={styles.headerWrapper} >
+                <button className={styles.backBtn} type='button' onClick={() => navigate('/')}>
+                    <Icon className={styles.backBtIcon} icon="bi:arrow-up" rotate={3} />
+                </button>
+            </div>
+
             <div className={styles.uploadComponentInnerWrapper}>
+
                 <VideoUploadForm videoRef={videoRef} handleSeek={handleSeek} updateShowSubTitleOverlay={updateShowSubTitleOverlay} seekMode={seekMode} setSeekMode={setSeekMode} showActiveSubtitle={showActiveSubtitle} setShowActiveSubtitle={setShowActiveSubtitle} setStartTime={setStartTime} startTime={startTime} setEndTime={setEndTime} endTime={endTime} subtitles={subtitles} setSubtitles={setSubtitles} selectedVideo={selectedVideo} setSelectedVideo={setSelectedVideo} videoTitle={videoTitle} setVideoTitle={setVideoTitle} setSliderTime={setSliderTime} sliderTime={sliderTime} setVideoFile={setVideoFile} videoFile={videoFile} />
                 <SubtitleForm videoRef={videoRef} handleSeek={handleSeek} updateShowSubTitleOverlay={updateShowSubTitleOverlay} seekMode={seekMode} setSeekMode={setSeekMode} showActiveSubtitle={showActiveSubtitle} setShowActiveSubtitle={setShowActiveSubtitle} setStartTime={setStartTime} startTime={startTime} setEndTime={setEndTime} endTime={endTime} subtitles={subtitles} setSubtitles={setSubtitles} selectedVideo={selectedVideo} setSliderTime={setSliderTime} sliderTime={sliderTime} />
-
                 <div className={styles.submitBtnWrapper}>
                     {selectedVideo &&
                         <>
@@ -114,9 +124,9 @@ const UploadFormComponent = () => {
                                 type='button'>
                                 <p>Upload</p>
                             </button>
-                            <button className={styles.cancelBtn} type='button'>
+                            {/* <button className={styles.cancelBtn} type='button'>
                                 <p>Cancel</p>
-                            </button>
+                            </button> */}
                         </>
                     }
                 </div>

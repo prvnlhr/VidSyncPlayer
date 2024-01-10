@@ -1,17 +1,22 @@
 import React from 'react'
 import styles from "./styles/videoStyles.module.css";
-import VideoThumbnail from 'react-video-thumbnail';
-const VideoComponent = ({ exploreVideo, setExploreVideo, videoData, setCurrentPlayingVideo, currentPlayingVideo }) => {
+import { useNavigate } from "react-router-dom";
 
-    const { videoTitle, videoUrl, subtitleUrl } = videoData;
+const VideoComponent = ({ videoData, currentPlayerVideoData, setCurrentPlayerVideoData }) => {
+    const navigate = useNavigate();
+
+    const handleVideoClicked = (videoData) => {
+        navigate('/player');
+        console.log(videoData);
+        setCurrentPlayerVideoData(videoData);
+    }
+
     return (
-        <div className={exploreVideo ? styles.videoWrapperShrink : styles.videoWrapper} >
-            <div className={styles.thumbnailWrapper} onClick={() => setCurrentPlayingVideo(videoData)}>
+        <div className={styles.videoWrapper} >
+            <div className={styles.videoInnerWrapper} onClick={() => handleVideoClicked(videoData)} >
                 <video
-                    src={videoUrl}
-                    alt={videoTitle}
-                    className={styles.videoThumbnail}
-                    controls={false}
+                    className={styles.videoTag}
+                    src={videoData.videoUrl}
                 />
             </div>
         </div>

@@ -2,16 +2,28 @@
     grid-area: subtitleUploadWrapper;
     width: 100%;
     height: 100%;
+    min-height: 100%;
     /* border: 1px solid skyblue; */
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-.formGridWrapper {
+.subtitleInputInnerWrapper {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    /* background-color: skyblue; */
+}
+
+.timeSubInputFormWrapper {
     width: 100%;
     height: 40%;
+    min-height: 50%;
     /* border: 1px solid red; */
     display: grid;
     grid-gap: 2%;
@@ -21,7 +33,6 @@
         "startTimeWrapper endTimeWrapper"
         "subtitleTextInputWrapper subtitleTextInputWrapper";
     box-sizing: border-box;
-    padding: 3%;
 }
 
 .startTimeWrapper {
@@ -170,7 +181,7 @@
 .subtitleTextInputWrapper {
     grid-area: subtitleTextInputWrapper;
     width: 100%;
-    height: 100%;
+    height: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -226,7 +237,7 @@
     justify-content: center;
     align-items: center;
     background-color: #BFDAF3;
-
+    cursor: pointer
 }
 
 .addBtnIcon {
@@ -235,9 +246,9 @@
 
 
 
-/* ----------------------------- */
+/* |> SUBTITLE LIST STYLES ----------------------------------------- */
 
-.subtitleList {
+.add_list_and_header_wrapper {
     width: 100%;
     height: 60%;
     /* border: 1px solid green; */
@@ -245,52 +256,58 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    /* background-color: skyblue; */
 }
 
-.sublistHeader {
+.addedListHeaderWraper {
     position: relative;
     width: 100%;
     height: 15%;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
+    /* border: 1px solid red; */
 }
 
-.sublistHeader::after {
+
+.addedListHeaderWraper p {
+    font-size: 0.8rem;
+    font-family: 'Poppins';
+    color: black;
+    margin-left: 2%;
+}
+
+.addedListHeaderWraper::after {
     position: absolute;
     content: '';
     background-color: #7F56D9;
     height: 2px;
     width: 20px;
-    bottom: -5px;
-    left: 3%;
+    bottom: -8px;
+    left: 2%;
     border-radius: 10px;
-
 }
 
-.sublistHeader p {
-    font-size: 0.8rem;
-    font-family: 'Poppins';
-    color: black;
-    margin-left: 3%;
-}
-
-.subList {
+.addedSubsListWrapper {
     width: 100%;
-    height: 85%;
+    height: 80%;
     /* border: 1px solid green; */
     overflow-y: scroll;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
+    margin-top: 5%;
 }
 
-.subList::-webkit-scrollbar {
+.addedSubsListWrapper::-webkit-scrollbar {
     display: none;
 }
 
-.addedSubtitleWrapper {
+/* ------------------------- */
+
+.addListItemWrapper {
+    position: relative;
     width: 60%;
     height: 55px;
     min-height: 55px;
@@ -304,8 +321,21 @@
     margin-bottom: 5px;
     cursor: pointer;
     border-radius: 8px;
-    background-color: #F4EBFF;
     margin-left: 3%;
+}
+
+.addListItemWrapper::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: #7F56D9;
+    height: 40%;
+    width: 0.14rem;
+    border-radius: 10px;
 }
 
 .startTimeStampDiv {
@@ -324,6 +354,7 @@
     font-size: 0.8rem;
     font-family: 'Raleway';
     color: black;
+    font-weight: 500;
 }
 
 .endTimeStampDiv {
@@ -342,6 +373,8 @@
     font-size: 0.8rem;
     font-family: 'Raleway';
     color: black;
+    font-weight: 500;
+
 }
 
 .subtitleTextDiv {
@@ -351,35 +384,36 @@
     height: 100%;
     /* border: 1px solid skyblue; */
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    padding-left: 0%;
 }
 
 .subtitleTextInnerDiv {
     position: relative;
     width: 95%;
     height: 100%;
-    /* border: 1px solid red; */
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    padding-top: 0%;
     box-sizing: border-box;
-    margin-left: 0%;
+    background-color: #F4EBFF;
+    flex-wrap: wrap;
+    border-radius: 8px;
 }
 
 .subtitleText {
     position: relative;
     font-size: 0.7rem;
-    font-family: 'Raleway';
+    font-family: 'Poppins';
     color: black;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    /* Number of lines to show */
     -webkit-box-orient: vertical;
     white-space: normal;
+    width: 90%;
 }
 
 
@@ -394,41 +428,7 @@
 }
 
 
-.subTitleTextIndicator::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #7F56D9;
-    height: 60%;
-    width: 0.14rem;
-    border-radius: 3px;
 
-}
-
-/* ------------------------------------------------ */
-.subTitleOverlayDiv {
-    position: absolute;
-    width: auto;
-    height: 25px;
-    background-color: black;
-    top: -10px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 2%;
-    padding-right: 2%;
-}
-
-.subTitleOverlayDiv p {
-    font-size: 0.8rem;
-    color: white;
-    white-space: nowrap;
-    font-family: 'Raleway';
-}
 
 .noSubMessageText {
     position: relative;
@@ -440,4 +440,108 @@
     margin-top: 3%;
     font-style: italic;
     font-weight: 500;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+
+
+    .subtitleInputInnerWrapper {
+        width: 90%;
+        height: 95%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        /* border: 1px solid red; */
+        /* background-color: skyblue; */
+    }
+
+    .timeSubInputFormWrapper {
+        width: 100%;
+        height: 48%;
+        /* border: 1px solid red; */
+        display: grid;
+        grid-gap: 2%;
+        grid-template-rows: 48% 50%;
+        grid-template-columns: 48% 50%;
+        grid-template-areas:
+            "startTimeWrapper endTimeWrapper"
+            "subtitleTextInputWrapper subtitleTextInputWrapper";
+        box-sizing: border-box;
+        padding: 0%;
+    }
+
+
+    .add_list_and_header_wrapper {
+        width: 100%;
+        height: 50%;
+        /* border: 1px solid green; */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+
+    .addedListHeaderWraper {
+        position: relative;
+        width: 100%;
+        height: 15%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        /* border: 1px solid red; */
+    }
+
+
+    .addedListHeaderWraper p {
+        font-size: 0.8rem;
+        font-family: 'Poppins';
+        color: black;
+        margin-left: 2%;
+    }
+
+    .addedListHeaderWraper::after {
+        position: absolute;
+        content: '';
+        background-color: #7F56D9;
+        height: 2px;
+        width: 20px;
+        bottom: -8px;
+        left: 2%;
+        border-radius: 10px;
+    }
+
+    .addedSubsListWrapper {
+        width: 100%;
+        height: 80%;
+        overflow-y: scroll;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 5%;
+        /* border: 1px solid red; */
+    }
+
+
+
+    .addListItemWrapper {
+        width: 90%;
+        height: 55px;
+        min-height: 55px;
+        display: grid;
+        grid-template-areas:
+            "startTimeStampDiv subtitleTextDiv"
+            "endTimeStampDiv subtitleTextDiv";
+        grid-template-rows: 50% 50%;
+        grid-template-columns: auto minmax(0, 1fr);
+        margin-top: 5%;
+        margin-bottom: 5px;
+        cursor: pointer;
+        border-radius: 8px;
+        background-color: #F4EBFF;
+        margin-left: 0%;
+    }
+
 }

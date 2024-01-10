@@ -1,21 +1,51 @@
 .uploadComponentWrapper {
     width: 100%;
-    height: 90%;
+    height: 100%;
     background-color: white;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1;
+    /* border: 1px solid red; */
+    flex-direction: column;
 }
+
+/* ------------------------------ */
+.headerWrapper {
+    width: 100%;
+    height: 10%;
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.backBtn {
+    background: transparent;
+    /* border: 1px solid red; */
+    height: 80%;
+    width: auto;
+    margin: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 2%;
+    cursor: pointer;
+}
+
+.backBtIcon {
+    font-size: 1.2rem;
+}
+
+.backBtn:hover {
+    /* border: 1px solid cyan; */
+}
+
+/* ---------------------------------- */
 
 .uploadComponentInnerWrapper {
     position: relative;
-    width: 95%;
-    height: 95%;
+    width: 100%;
+    height: 90%;
     /* border: 1px solid salmon; */
     display: grid;
     justify-content: center;
@@ -23,7 +53,7 @@
     grid-template-columns: 50% 50%;
     grid-template-rows: 90% 10%;
     grid-template-areas:
-        "videoUploadWrapper subtitleUploadWrapper"
+        "vidComponentOuterWrapper subtitleUploadWrapper"
         "submitBtnWrapper submitBtnWrapper"
     ;
 }
@@ -83,21 +113,31 @@
 
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .headerWrapper {
+        width: 100%;
+        height: 5%;
+        /* border: 1px solid green; */
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
 
     .uploadComponentInnerWrapper {
         position: relative;
-        width: 90%;
-        height: 90%;
-        border: 1px solid salmon;
+        width: 100%;
+        height: 95%;
+        /* border: 1px solid salmon; */
         display: grid;
         justify-content: center;
         align-items: center;
         grid-template-columns: 100%;
-        grid-template-rows: 45% 45% 10%;
+        grid-template-rows: 45% 47% 8%;
         grid-template-areas:
-            "videoUploadWrapper "
+            "vidComponentOuterWrapper "
             "subtitleUploadWrapper"
-            "submitBtnWrapper submitBtnWrapper"
-        ;
+            "submitBtnWrapper";
     }
+
+
+
 }

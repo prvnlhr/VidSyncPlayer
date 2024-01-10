@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Icon } from '@iconify/react';
 import styles from "./styles/videoUploadFormStyles.module.css";
 import { uploadFormData } from "../../services/apiServices";
-import subtt from "../playerComponent/sub.vtt"
 
 
 const VideoUploadForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seekMode, setSeekMode, showActiveSubtitle, setShowActiveSubtitle, setStartTime, startTime, setEndTime, endTime, subtitles, setSubtitles, selectedVideo, setSelectedVideo, videoTitle, setVideoTitle, setSliderTime, sliderTime, setVideoFile, videoFile }) => {
@@ -30,10 +29,6 @@ const VideoUploadForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seek
         }
     };
 
-
-
-
-    // ---------------------------------------
 
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -105,33 +100,24 @@ const VideoUploadForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seek
 
 
     return (
-        <div className={styles.videoUploadWrapper}>
+        <div className={styles.vidComponentOuterWrapper}>
 
-            <div className={styles.videoUploadInnerWrapper}>
+            <div className={styles.vidComponentInnerWrapper}>
 
-                <div className={styles.videoSelectPreviewWrapper}>
+                <div className={styles.vidLabelAndControlContainer}>
 
-                    <div className={styles.selectPreviewContainer}>
-                        {/* <input
-                            type="file"
-                            id="file"
-                            className={styles.imgFileInput}
-                            onChange={handleChange}
-                        /> */}
-
+                    <div className={styles.vidLabelInputContainer}>
                         <label className={styles.videoLabelTag} htmlFor="video-input">
                             {
                                 selectedVideo ?
                                     (
-                                        <div className={styles.videoPreviewContainer}>
+                                        <div className={styles.vidPreviewSubtitleContainer}>
                                             <video
                                                 className={styles.previewVideoTag}
-                                                controls
                                                 ref={videoRef}
                                                 onTimeUpdate={seekMode ? handleSeek : null}
                                                 onMouseEnter={() => setSeekMode(true)}>
                                                 <source src={selectedVideo} type="video/mp4" />
-                                                {/* <track kind="subtitles" src="../playerComponent/sub.vtt" srclang="en-us" label="English" /> */}
                                                 Your browser does not support the video tag.
                                             </video>
 
@@ -139,7 +125,6 @@ const VideoUploadForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seek
                                                 {showActiveSubtitle &&
                                                     <p>{showActiveSubtitle.text}</p>
                                                 }
-
                                             </div>
 
                                         </div>
@@ -164,11 +149,10 @@ const VideoUploadForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seek
                             onChange={handleFileChange}
                             required
                         />
-                        {/* <button type='button' onClick={handleUpload}>Upload</button> */}
                     </div>
 
 
-                    <div className={styles.controlsContainer}>
+                    <div className={styles.vidControlContainer}>
 
                         {selectedVideo &&
                             <div className={styles.controlsInnerContainer}>
@@ -197,12 +181,10 @@ const VideoUploadForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seek
 
                         }
 
-
-
                     </div>
                 </div>
 
-                <div className={styles.videoTitleInputWrapper}>
+                <div className={styles.vidTitleInputOuterWrapper}>
                     <div className={`${styles.vidTitleInputContainer} ${(currFocusField === 1) && styles.focusFieldStyle} `}>
                         <div className={styles.labelWrapper} >
                             <p style={{ color: selectedVideo ? '#7F56D9' : '#98A2B3' }} className={styles.labelText}>VIDEO TITLE</p>
@@ -210,7 +192,6 @@ const VideoUploadForm = ({ videoRef, handleSeek, updateShowSubTitleOverlay, seek
                         <div className={styles.inputWrapper} >
                             <input
                                 disabled={selectedVideo ? false : true}
-                                // disabled={imgFile ? false : true}
                                 className={styles.inputField}
                                 required
                                 type="text"

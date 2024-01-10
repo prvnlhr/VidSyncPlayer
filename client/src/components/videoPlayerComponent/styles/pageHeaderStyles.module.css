@@ -1,0 +1,46 @@
+.pageHeaderWrapper {
+    grid-area: pageHeaderWrapper;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* border: 1px solid red; */
+}
+
+.backBtn {
+    background: transparent;
+    /* border: 1px solid red; */
+    height: 80%;
+    width: auto;
+    margin: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 2%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.backBtIcon {
+    font-size: 1.2rem;
+}
+
+.backBtn:hover {
+    border: 1px solid cyan;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .backBtn {
+        background: transparent;
+        /* border: 1px solid red; */
+        height: 100%;
+        width: auto;
+        margin: 0;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-left: 2%;
+        cursor: pointer;
+    }
+}

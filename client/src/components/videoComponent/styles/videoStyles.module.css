@@ -1,42 +1,55 @@
 .videoWrapper {
-    aspect-ratio: 16/10;
-    height: 90%;
-    margin-left: 15px;
-    margin-right: 15px;
-    cursor: pointer;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 3px;
-    overflow: hidden;
-
+    width: 25%;
+    aspect-ratio: 4/2.8;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #e9d7fe76;
+    padding: 3px;
+    border-radius: 8px;
+    border: 1px solid #d6bbfb73;
 }
 
-.videoWrapperShrink {
-    aspect-ratio: 16/10;
-    height: 180px;
-    margin-left: 0px;
-    margin-right: 15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.thumbnailWrapper {
+.videoInnerWrapper {
     width: 100%;
     height: 100%;
+    /* border: 1px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 7px;
+    overflow: hidden;
+    cursor: pointer;
+
 }
 
-.videoThumbnail {
+.videoTag {
     width: 100%;
     height: 100%;
     object-fit: fill;
+
+}
+
+
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .videoWrapper {
+        width: 85%;
+        aspect-ratio: 4/2.4;
+        margin-left: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 3px;
+    }
 }
