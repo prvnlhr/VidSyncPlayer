@@ -1,19 +1,42 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Icon } from '@iconify/react';
 import styles from "./styles/videoUploadFormStyles.module.css";
-import { uploadFormData } from "../../services/apiServices";
 
-const VideoUploadForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, formError, handleSeek, updateShowSubTitleOverlay, seekMode, setSeekMode, showActiveSubtitle, setShowActiveSubtitle, setStartTime, startTime, setEndTime, endTime, subtitles, setSubtitles, selectedVideo, setSelectedVideo, videoTitle, setVideoTitle, setSliderTime, sliderTime, setVideoFile, videoFile }) => {
-
-
-
+const VideoUploadForm = ({
+    overlaySubTitleList,
+    setOverlaySubTitleList,
+    overlaySubText,
+    setOverlaySubText,
+    videoRef,
+    formError,
+    handleSeek,
+    updateShowSubTitleOverlay,
+    seekMode,
+    setSeekMode,
+    showActiveSubtitle,
+    setShowActiveSubtitle,
+    setStartTime,
+    startTime,
+    setEndTime,
+    endTime,
+    subtitles,
+    setSubtitles,
+    selectedVideo,
+    setSelectedVideo,
+    videoTitle,
+    setVideoTitle,
+    setSliderTime,
+    sliderTime,
+    setVideoFile,
+    videoFile
+}) => {
     const [currFocusField, setCurrFocusField] = useState(undefined);
     const onFocus = (val) => {
-        setCurrFocusField(val)
-    }
-
+        setCurrFocusField(val);
+    };
 
     const [isPlaying, setIsPlaying] = useState(false);
+
     const playPauseHandler = () => {
         const video = videoRef.current;
 
@@ -22,12 +45,13 @@ const VideoUploadForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, formEr
         } else {
             video.play();
         }
+
         setIsPlaying(!isPlaying);
     };
 
-
     useEffect(() => {
         const video = videoRef.current;
+
         if (video) {
             const handleTimeUpdate = () => {
                 setSliderTime(video.currentTime);
@@ -41,8 +65,6 @@ const VideoUploadForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, formEr
         }
     }, [isPlaying, videoRef]);
 
-
-
     const videoInputRef = useRef(null);
 
     const selectVideo = () => {
@@ -53,21 +75,20 @@ const VideoUploadForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, formEr
         const videoInput = videoInputRef.current;
         const selectedVideo = videoInput.files[0];
         setVideoFile(selectedVideo);
+
         if (selectedVideo && selectedVideo.type.includes('video')) {
             const videoURL = URL.createObjectURL(selectedVideo);
             setSelectedVideo(videoURL);
         }
     };
 
-
-
-
     return (
         <div className={styles.vidComponentWrapper}>
-
-            <div className={styles.vidComponentInnerWrapper} >
-
-                <div className={`${styles.uploadPreviewBox} ${selectedVideo && styles.uploadPreviewBox_hiddenBorder}`} onClick={selectVideo}>
+            <div className={styles.vidComponentInnerWrapper}>
+                <div
+                    className={`${styles.uploadPreviewBox} ${selectedVideo && styles.uploadPreviewBox_hiddenBorder}`}
+                    onClick={selectVideo}
+                >
                     <input
                         type="file"
                         ref={videoInputRef}
@@ -75,17 +96,18 @@ const VideoUploadForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, formEr
                         accept="video/*"
                         onChange={previewVideo}
                     />
+
                     {selectedVideo ? (
-                        <video className={styles.previewVideoTag}
+                        <video
+                            className={styles.previewVideoTag}
                             ref={videoRef}
                             onTimeUpdate={seekMode ? handleSeek : null}
                             onMouseEnter={() => setSeekMode(true)}
                         >
-
                             <source src={selectedVideo} type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                    ) :
+                    ) : (
                         <div className={styles.selectPlaceholderContainer}>
                             <Icon className={styles.clickIcon} icon="ph:cursor-click-light" />
                             <p className={styles.selectText}>Click to select a video</p>
@@ -93,22 +115,24 @@ const VideoUploadForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, formEr
                                 Supported formats: <span>MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, OGG</span>
                             </p>
                         </div>
-                    }
-                    {selectedVideo &&
+                    )}
+
+                    {selectedVideo && (
                         <div className={styles.vidSubtitleDiv}>
-                            {/* <p>{overlaySubTitle}</p> */}
+                            <p>{overlaySubText}</p>
                         </div>
-                    }
+                    )}
                 </div>
 
-                <div className={styles.videoControlsWrapper} >
-                    {selectedVideo &&
+                {selectedVideo && (
+                    <div className={styles.videoControlsWrapper}>
                         <div className={styles.controlsInnerContainer}>
                             <div className={styles.playPauseBtnWrapper} onClick={playPauseHandler}>
                                 <Icon
                                     className={styles.playPauseIcon}
                                     icon={isPlaying ? 'bi:pause-fill' : 'bi:play-fill'}
-                                    rotate={4} />
+                                    rotate={4}
+                                />
                             </div>
                             <div className={styles.rangeSliderWrapper}>
                                 <input
@@ -126,15 +150,19 @@ const VideoUploadForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, formEr
                                 />
                             </div>
                         </div>
-
-                    }
-                </div>
+                    </div>
+                )}
 
                 <div className={styles.vidTitleInputWrapper}>
-                    <div className={styles.vidTitleInputContainer} style={{ border: formError && (videoTitle.length === 0) ? '2px solid red' : '' }}>
-                        <div className={`${styles.vidTitleInputInnerContainer} ${(currFocusField === 1) && styles.focusFieldStyle} `}  >
-                            <div className={styles.labelWrapper} >
-                                <p style={{ color: selectedVideo ? 'var(--ui-scheme-color)' : '#98A2B3' }} className={styles.labelText}>VIDEO TITLE</p>
+                    <div
+                        className={styles.vidTitleInputContainer}
+                        style={{ border: formError && videoTitle.length === 0 ? '2px solid red' : '' }}
+                    >
+                        <div className={`${styles.vidTitleInputInnerContainer} ${(currFocusField === 1) && styles.focusFieldStyle}`}>
+                            <div className={styles.labelWrapper}>
+                                <p style={{ color: selectedVideo ? 'var(--ui-scheme-color)' : '#98A2B3' }} className={styles.labelText}>
+                                    VIDEO TITLE
+                                </p>
                             </div>
                             <div className={styles.inputWrapper}>
                                 <input
@@ -146,19 +174,14 @@ const VideoUploadForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, formEr
                                     onChange={(e) => setVideoTitle(e.target.value)}
                                     onFocus={() => onFocus(1)}
                                     placeholder={formError ? formError : ''}
-
                                 />
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     );
-}
+};
 
-export default VideoUploadForm
-
+export default VideoUploadForm;

@@ -2,7 +2,10 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Icon } from '@iconify/react';
 import styles from "./styles/subTitileFormStyles.module.css";
 
-const SubtitleForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, updateShowSubTitleOverlay, setSeekMode, setShowActiveSubtitle, showActiveSubtitle, setStartTime, startTime, setEndTime, endTime, subtitles, setSubtitles, selectedVideo, setSliderTime }) => {
+const SubtitleForm = ({ overlaySubTitleList,
+    setOverlaySubTitleList,
+    overlaySubText,
+    setOverlaySubText, videoRef, updateShowSubTitleOverlay, setSeekMode, setShowActiveSubtitle, showActiveSubtitle, setStartTime, startTime, setEndTime, endTime, subtitles, setSubtitles, selectedVideo, setSliderTime }) => {
 
 
 
@@ -22,32 +25,37 @@ const SubtitleForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, updateSho
         };
     };
 
-
-
     const handleSubtitleTextChange = (e) => {
         setSubtitleText(e.target.value);
     };
 
-
-
     const handleAddSubtitle = () => {
+
         const newSubtitle = {
             startTime: formatTime(startTime),
             endTime: formatTime(endTime),
             text: subtitleText,
         };
 
-        setSubtitles([...subtitles, newSubtitle]);
+        setSubtitles([newSubtitle, ...subtitles]);
 
-        setShowActiveSubtitle(newSubtitle);
 
         // Clear the subtitle text input
         setSubtitleText('');
+
 
         // After adding new subtitle, update the startTime for next subtitle input
         setStartTime((parseFloat(newSubtitle.endTime.minutes) * 60) +
             parseFloat(newSubtitle.endTime.seconds) +
             parseFloat(newSubtitle.endTime.milliseconds) / 1000 + 0.10); // Add 150 milliseconds
+
+        setEndTime(
+            (parseFloat(newSubtitle.endTime.minutes) * 60) +
+            parseFloat(newSubtitle.endTime.seconds) +
+            parseFloat(newSubtitle.endTime.milliseconds) / 1000 +
+            0.10 + 0.1 // Add 150 milliseconds and additional 100 milliseconds
+        );
+
 
     };
 
@@ -75,7 +83,7 @@ const SubtitleForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, updateSho
 
         if (video) {
             setStartTime(newTime);
-            // setEndTime(newTime + 0.01); // Not in use. now endTime is automatically changed with useEffect
+            // setEndTime(newTime + 0.1); // Not in use. now endTime is automatically changed with useEffect
             video.currentTime = newTime;
             setSliderTime(newTime);
         }
@@ -185,8 +193,8 @@ const SubtitleForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, updateSho
         video.currentTime = parseFloat(clickedSub.startTime.minutes) * 60 +
             parseFloat(clickedSub.startTime.seconds) +
             parseFloat(clickedSub.startTime.milliseconds) / 1000;
-        updateShowSubTitleOverlay(video.currentTime);
 
+        updateShowSubTitleOverlay(video.currentTime);
     };
 
 
@@ -395,21 +403,3 @@ const SubtitleForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, updateSho
 }
 
 export default SubtitleForm
-
-
-
-// <div
-//     className={styles.addListItemWrapper}
-//  >
-//     <div className={styles.startTimeStampDiv}>
-//         <p>{`${`01`}: ${`02`}:${`23`}`}</p>
-//     </div>
-//     <div className={styles.endTimeStampDiv}>
-//         <p>{`${`02`}: ${`15`}:${`48`}`}</p>
-//     </div>
-//     <div className={styles.subtitleTextDiv}>
-//         <div className={styles.subtitleTextInnerDiv}>
-//             <p className={styles.subtitleText}> {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`}</p>
-//         </div>
-//     </div>
-// </div>

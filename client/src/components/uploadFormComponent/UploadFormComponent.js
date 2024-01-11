@@ -1,48 +1,32 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Icon } from '@iconify/react';
-import styles from "./styles/uploadFormComponentStyles.module.css";
-import VideoUploadForm from "./VideoUploadForm";
-import SubtitleForm from "./SubtitleForm";
-import { uploadFormData } from "../../services/apiServices";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-
-import { useSelector, useDispatch } from 'react-redux'
-import { uploadVideoData } from "../../redux/features/videoSlice"
+import styles from './styles/uploadFormComponentStyles.module.css';
+import VideoUploadForm from './VideoUploadForm';
+import SubtitleForm from './SubtitleForm';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { uploadVideoData } from '../../redux/features/videoSlice';
 
 const UploadFormComponent = ({ setCurrentPlayerVideoData }) => {
 
     const navigate = useNavigate();
-
     const videosState = useSelector((state) => state.videos);
-
     const { isLoading, action } = videosState;
-
-
     const dispatch = useDispatch();
-
     const videoRef = useRef(null);
 
     const [formError, setFormError] = useState('');
-
     const [startTime, setStartTime] = useState(0);
     const [endTime, setEndTime] = useState(0.1);
-
     const [sliderTime, setSliderTime] = useState(0);
-
     const [subtitles, setSubtitles] = useState([]);
     const [showActiveSubtitle, setShowActiveSubtitle] = useState(null);
-
-
     const [videoFile, setVideoFile] = useState(null);
     const [selectedVideo, setSelectedVideo] = useState(null);
     const [videoTitle, setVideoTitle] = useState('');
-
-
     const [seekMode, setSeekMode] = useState(true);
-
-    const [overlaySubTitle, setOverlaySubtitle] = useState([]);
-
+    const [overlaySubTitleList, setOverlaySubTitleList] = useState([]);
+    const [overlaySubText, setOverlaySubText] = useState('');
 
     const updateShowSubTitleOverlay = (durationInSeconds) => {
 
@@ -50,8 +34,10 @@ const UploadFormComponent = ({ setCurrentPlayerVideoData }) => {
         const seconds = Math.floor(durationInSeconds % 60);
         const milliseconds = Math.floor((durationInSeconds % 1) * 1000);
 
-        // console.log(`Duration: ${minutes} minutes, ${seconds} seconds, ${milliseconds} milliseconds`);
-        // console.log(subtitles);
+        console.log(`Duration: ${minutes} minutes, ${seconds} seconds, ${milliseconds} milliseconds`);
+
+        console.log(subtitles);
+
         const activeSubtitlesForTime = subtitles.filter((subtitle) => {
             const startTimestamp =
                 parseFloat(subtitle.startTime.minutes) * 60 +
@@ -67,10 +53,10 @@ const UploadFormComponent = ({ setCurrentPlayerVideoData }) => {
         });
 
         if (activeSubtitlesForTime) {
-            // console.log(minutes, ':', seconds, ':', milliseconds, activeSubtitlesForTime)
-            setShowActiveSubtitle(activeSubtitlesForTime[0]);
+            console.log(minutes, ':', seconds, ':', milliseconds, activeSubtitlesForTime)
+            setOverlaySubText(activeSubtitlesForTime[0]?.text);
         } else {
-            setShowActiveSubtitle(null);
+            setOverlaySubText('');
         }
     }
 
@@ -78,9 +64,8 @@ const UploadFormComponent = ({ setCurrentPlayerVideoData }) => {
         let currentTime;
         const video = videoRef.current;
         currentTime = video.currentTime;
-        currentTime = video.currentTime;
         setStartTime(currentTime);
-        setEndTime(currentTime + 0.01);
+        setEndTime(currentTime + 0.1);
         updateShowSubTitleOverlay(currentTime);
     };
 
@@ -98,7 +83,6 @@ const UploadFormComponent = ({ setCurrentPlayerVideoData }) => {
     };
 
     const handleFormSubmit = () => {
-
         if (!videoTitle) {
             setFormError('Title is required');
             return;
@@ -113,77 +97,90 @@ const UploadFormComponent = ({ setCurrentPlayerVideoData }) => {
 
         dispatch(uploadVideoData(formData))
             .then((action) => {
-                // console.log('Upload successful:', action.payload);
                 setCurrentPlayerVideoData(action.payload);
             })
             .catch((error) => {
                 console.error('Upload failed:', error);
-
             });
 
-        navigate("/player");
+        navigate('/player');
     };
-
-
-
 
     return (
         <div className={styles.uploadComponentWrapper}>
-
-            <div className={styles.headerWrapper} >
-                <button className={styles.backBtn} type='button' onClick={() => navigate('/')}>
+            <div className={styles.headerWrapper}>
+                <button className={styles.backBtn} type="button" onClick={() => navigate('/')}>
                     <Icon className={styles.backBtIcon} icon="bi:arrow-up" rotate={3} />
                 </button>
 
-                {selectedVideo &&
 
-                    <button className={styles.submitBtn} onClick={handleFormSubmit} type='button'>
-
-                        <div className={styles.btnIconDiv} >
+                {selectedVideo && (
+                    <button className={styles.submitBtn} onClick={handleFormSubmit} type="button">
+                        <div className={styles.btnIconDiv}>
                             <Icon className={styles.btnIcon} icon="tabler:upload" />
                         </div>
-                        <div className={styles.btnTextDiv} >
+                        <div className={styles.btnTextDiv}>
                             <p>Upload</p>
                         </div>
-
-                        {/* {(isLoading && action === 'uploading')
-                                ?
-                                <p>Uploding</p>
-                                :
-                                <>
-                                    <Icon icon="tabler:upload" />
-                                    <p>Upload</p>
-                                </>
-                            } */}
                     </button>
-                }
+                )}
             </div>
 
             <div className={styles.uploadComponentInnerWrapper}>
-                <VideoUploadForm overlaySubTitle={overlaySubTitle} setOverlaySubtitle={setOverlaySubtitle} formError={formError} videoRef={videoRef} handleSeek={handleSeek} updateShowSubTitleOverlay={updateShowSubTitleOverlay} seekMode={seekMode} setSeekMode={setSeekMode} showActiveSubtitle={showActiveSubtitle} setShowActiveSubtitle={setShowActiveSubtitle} setStartTime={setStartTime} startTime={startTime} setEndTime={setEndTime} endTime={endTime} subtitles={subtitles} setSubtitles={setSubtitles} selectedVideo={selectedVideo} setSelectedVideo={setSelectedVideo} videoTitle={videoTitle} setVideoTitle={setVideoTitle} setSliderTime={setSliderTime} sliderTime={sliderTime} setVideoFile={setVideoFile} videoFile={videoFile} />
-                <SubtitleForm setOverlaySubtitle={setOverlaySubtitle} overlaySubTitle={overlaySubTitle} videoRef={videoRef} handleSeek={handleSeek} updateShowSubTitleOverlay={updateShowSubTitleOverlay} seekMode={seekMode} setSeekMode={setSeekMode} showActiveSubtitle={showActiveSubtitle} setShowActiveSubtitle={setShowActiveSubtitle} setStartTime={setStartTime} startTime={startTime} setEndTime={setEndTime} endTime={endTime} subtitles={subtitles} setSubtitles={setSubtitles} selectedVideo={selectedVideo} setSliderTime={setSliderTime} sliderTime={sliderTime} />
+                <VideoUploadForm
+                    formError={formError}
+                    videoRef={videoRef}
+                    handleSeek={handleSeek}
+                    updateShowSubTitleOverlay={updateShowSubTitleOverlay}
+                    seekMode={seekMode}
+                    setSeekMode={setSeekMode}
+                    showActiveSubtitle={showActiveSubtitle}
+                    setShowActiveSubtitle={setShowActiveSubtitle}
+                    setStartTime={setStartTime}
+                    startTime={startTime}
+                    setEndTime={setEndTime}
+                    endTime={endTime}
+                    subtitles={subtitles}
+                    setSubtitles={setSubtitles}
+                    selectedVideo={selectedVideo}
+                    setSelectedVideo={setSelectedVideo}
+                    videoTitle={videoTitle}
+                    setVideoTitle={setVideoTitle}
+                    setSliderTime={setSliderTime}
+                    sliderTime={sliderTime}
+                    setVideoFile={setVideoFile}
+                    videoFile={videoFile}
+                    overlaySubTitleList={overlaySubTitleList}
+                    setOverlaySubTitleList={setOverlaySubTitleList}
+                    overlaySubText={overlaySubText}
+                    setOverlaySubText={setOverlaySubText}
+                />
+
+                <SubtitleForm
+                    videoRef={videoRef}
+                    handleSeek={handleSeek}
+                    updateShowSubTitleOverlay={updateShowSubTitleOverlay}
+                    seekMode={seekMode}
+                    setSeekMode={setSeekMode}
+                    showActiveSubtitle={showActiveSubtitle}
+                    setShowActiveSubtitle={setShowActiveSubtitle}
+                    setStartTime={setStartTime}
+                    startTime={startTime}
+                    setEndTime={setEndTime}
+                    endTime={endTime}
+                    subtitles={subtitles}
+                    setSubtitles={setSubtitles}
+                    selectedVideo={selectedVideo}
+                    setSliderTime={setSliderTime}
+                    sliderTime={sliderTime}
+                    overlaySubTitleList={overlaySubTitleList}
+                    setOverlaySubTitleList={setOverlaySubTitleList}
+                    overlaySubText={overlaySubText}
+                    setOverlaySubText={setOverlaySubText}
+                />
             </div>
         </div>
     );
 };
 
 export default UploadFormComponent;
-
-
-{/* <div className={styles.submitBtnWrapper}>
-{selectedVideo &&
-    <>
-        <button className={styles.submitBtn}
-            onClick={handleFormSubmit}
-            type='button'>
-            {(isLoading && action === 'uploading')
-                ?
-                <p>Uploding</p>
-                :
-                <p>Upload</p>
-            }
-        </button>
-
-    </>
-}
-</div> */}
