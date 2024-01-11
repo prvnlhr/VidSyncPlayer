@@ -21,7 +21,7 @@
 .nextListHeaderText {
     position: relative;
     font-size: 1rem;
-    font-family: 'Poppins';
+    font-family: var(--font-family);
     font-weight: 500;
     color: black;
     margin-left: 2%;
@@ -35,7 +35,7 @@
     border-radius: 10px;
     left: 0;
     bottom: -10px;
-    background-color: #9E77ED;
+    background-color: var(--ui-scheme-color);
 }
 
 .nextListContentWrapper {
@@ -43,7 +43,7 @@
     height: 90%;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     /* border: 1px solid green; */
     padding-top: 0px;
@@ -92,7 +92,7 @@
     .nextListHeaderText {
         position: relative;
         font-size: 1rem;
-        font-family: 'Poppins';
+        font-family: var(--font-family);
         font-weight: 500;
         color: black;
         margin-left: 8%;

@@ -18,6 +18,10 @@ const VideoComponent = ({ videoData, currentPlayerVideoData, setCurrentPlayerVid
                     className={styles.videoTag}
                     src={videoData.videoUrl}
                 />
+
+                <div className={styles.videoTitleDiv} >
+                    <p>{videoData.videoTitle}</p>
+                </div>
             </div>
         </div>
     )

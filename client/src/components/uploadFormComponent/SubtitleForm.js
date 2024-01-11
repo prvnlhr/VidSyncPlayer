@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Icon } from '@iconify/react';
 import styles from "./styles/subTitileFormStyles.module.css";
 
-const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setShowActiveSubtitle, setStartTime, startTime, setEndTime, endTime, subtitles, setSubtitles, selectedVideo, setSliderTime }) => {
+const SubtitleForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, updateShowSubTitleOverlay, setSeekMode, setShowActiveSubtitle, showActiveSubtitle, setStartTime, startTime, setEndTime, endTime, subtitles, setSubtitles, selectedVideo, setSliderTime }) => {
 
 
 
@@ -28,6 +28,8 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
         setSubtitleText(e.target.value);
     };
 
+
+
     const handleAddSubtitle = () => {
         const newSubtitle = {
             startTime: formatTime(startTime),
@@ -36,11 +38,17 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
         };
 
         setSubtitles([...subtitles, newSubtitle]);
-        // console.log(newSubtitle);
-        // setShowActiveSubtitle([...showActiveSubtitle, newSubtitle]);
+
         setShowActiveSubtitle(newSubtitle);
-        // // Clear the subtitle text input
+
+        // Clear the subtitle text input
         setSubtitleText('');
+
+        // After adding new subtitle, update the startTime for next subtitle input
+        setStartTime((parseFloat(newSubtitle.endTime.minutes) * 60) +
+            parseFloat(newSubtitle.endTime.seconds) +
+            parseFloat(newSubtitle.endTime.milliseconds) / 1000 + 0.10); // Add 150 milliseconds
+
     };
 
     const handleStarTimeIncrement = (unit) => {
@@ -57,9 +65,9 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
                 newTime = parseFloat(startTime) + 1;
                 break;
             case 'milliseconds':
-                // newTime = parseFloat(startTime) + 0.001; // 1 milli
-                // newTime = parseFloat(startTime) + 0.01; // 10 milli
-                newTime = parseFloat(startTime) + 0.1; // 100 milli
+                // newTime = parseFloat(startTime) + 0.001; // 1 millisec
+                // newTime = parseFloat(startTime) + 0.01; // 10 millisec
+                newTime = parseFloat(startTime) + 0.1;     // 100 milli
                 break;
             default:
                 break;
@@ -67,7 +75,7 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
 
         if (video) {
             setStartTime(newTime);
-            // setEndTime(newTime + 0.01); // Update end time correctly
+            // setEndTime(newTime + 0.01); // Not in use. now endTime is automatically changed with useEffect
             video.currentTime = newTime;
             setSliderTime(newTime);
         }
@@ -96,7 +104,7 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
         }
 
         setStartTime(newTime);
-        // setEndTime(newTime + 0.01); // Adjust end time accordingly
+        // setEndTime(newTime + 0.01); 
         video.currentTime = newTime;
         setSliderTime(newTime);
 
@@ -111,13 +119,13 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
 
         switch (unit) {
             case 'minutes':
-                newEndTime = parseFloat(endTime) + 60; // Increment by 60 seconds (1 minute)
+                newEndTime = parseFloat(endTime) + 60;
                 break;
             case 'seconds':
-                newEndTime = parseFloat(endTime) + 1; // Increment by 1 second
+                newEndTime = parseFloat(endTime) + 1;
                 break;
             case 'milliseconds':
-                newEndTime = parseFloat(endTime) + 0.1; // Increment by 0.1 second (100 milliseconds)
+                newEndTime = parseFloat(endTime) + 0.1;
                 break;
             default:
                 break;
@@ -183,6 +191,8 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
 
 
 
+
+
     return (
         <div className={styles.subtitleInputWrapper}>
 
@@ -193,7 +203,7 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
                         <div className={styles.startTimeContainer}>
 
                             <div className={styles.labelWrapper}>
-                                <p style={{ color: selectedVideo ? '#7F56D9' : '#98A2B3' }}>START TIME</p>
+                                <p style={{ color: selectedVideo ? 'var(--ui-scheme-color)' : '#98A2B3' }}>START TIME</p>
                             </div>
                             <div className={styles.inputWrapper}>
                                 <div className={`${styles.timeWrapper} ${styles.minWrapper}`}>
@@ -255,7 +265,7 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
                     <div className={styles.endTimeWrapper}>
                         <div className={styles.endTimeContainer}>
                             <div className={styles.labelWrapper}>
-                                <p style={{ color: selectedVideo ? '#7F56D9' : '#98A2B3' }}>END TIME</p>
+                                <p style={{ color: selectedVideo ? 'var(--ui-scheme-color)' : '#98A2B3' }}>END TIME</p>
                             </div>
                             <div className={styles.inputWrapper}>
                                 <div className={`${styles.timeWrapper} ${styles.minWrapper}`}>
@@ -317,7 +327,7 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
                     <div className={styles.subtitleTextInputWrapper}>
                         <div className={styles.subtitleTextInputContainer}>
                             <div className={styles.labelWrapper}>
-                                <p style={{ color: selectedVideo ? '#7F56D9' : '#98A2B3' }}>SUBTITLE TEXT</p>
+                                <p style={{ color: selectedVideo ? 'var(--ui-scheme-color)' : '#98A2B3' }}>SUBTITLE TEXT</p>
                             </div>
                             <div className={styles.subInputWrapper}>
                                 <input
@@ -325,7 +335,9 @@ const SubtitleForm = ({ videoRef, updateShowSubTitleOverlay, setSeekMode, setSho
                                     disabled={selectedVideo ? false : true}
                                     className={styles.subtitleTextInput}
                                     value={subtitleText}
-                                    onChange={handleSubtitleTextChange}
+                                    onChange={(e) => {
+                                        handleSubtitleTextChange(e);
+                                    }}
                                 />
                             </div>
                             <div className={styles.addBtnWrapper}>

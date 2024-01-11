@@ -5,17 +5,31 @@ import pageHeaderStyles from "./styles/pageHeaderStyles.module.css";
 import NextVideosList from "./NextVideosList";
 import { useNavigate } from "react-router-dom";
 import { Icon } from '@iconify/react';
+import { useSelector } from 'react-redux';
+import { Oval } from 'react-loader-spinner'
+
+
+const spinnerWrapper = {
+    height: `50px`,
+    with: `50px`,
+}
 
 const VideoPlayerPage = ({ currentPlayerVideoData, setCurrentPlayerVideoData }) => {
+
     const videoRef = useRef(null);
-    const customTrackRef = useRef(null);
+
     const navigate = useNavigate();
 
+    const videoState = useSelector((state) => state.videos);
+
+    const { isLoading, action, videosData } = videoState;
     const [cues, setCues] = useState([]);
+
     const [isCuesLoaded, setIsCuesLoaded] = useState(false);
 
     const handleBackBtnClicked = () => {
         navigate("/");
+        setCurrentPlayerVideoData(null);
     };
 
     const preprocessCues = (vttText) => {
@@ -94,31 +108,54 @@ const VideoPlayerPage = ({ currentPlayerVideoData, setCurrentPlayerVideoData }) 
 
 
 
-
     const Player = () => {
+
+        useEffect(() => {
+            if (!currentPlayerVideoData && videosData?.length > 0 && !isLoading && action !== 'uploading') {
+                setCurrentPlayerVideoData(videosData[0]);
+            }
+
+        }, [currentPlayerVideoData])
 
         return (
             <div className={playerStyles.playerWrapper}>
+
                 <div className={playerStyles.playerContainer}>
-                    <div className={playerStyles.videoWrapper}>
-                        <video
-                            className={` ${playerStyles.playerVideoTag}`}
-                            controls
-                            ref={videoRef}
-                        >
-                            <source src={currentPlayerVideoData.videoUrl} type="video/mp4" />
-                            <track
-                                label="English"
-                                kind="captions"
-                                srcLang="en"
-                                src={`data:text/vtt;base64,${btoa(createVTTFile(cues))}`}
-                                default
-                            />
-                        </video>
-                    </div>
-                    <div className={playerStyles.titleWrapper}>
-                        <p>{currentPlayerVideoData.videoTitle}</p>
-                    </div>
+
+                    {
+                        (isLoading && action === 'uploading')
+                            ?
+                            <div className={playerStyles.skeleton_loader} ></div>
+                            :
+                            <>
+
+                                {currentPlayerVideoData ?
+                                    <div className={playerStyles.videoWrapper}>
+                                        <video
+                                            className={` ${playerStyles.playerVideoTag}`}
+                                            controls
+                                            ref={videoRef}
+                                        >
+                                            <source src={currentPlayerVideoData?.videoUrl} type="video/mp4" />
+                                            <track
+                                                label="English"
+                                                kind="captions"
+                                                srcLang="en"
+                                                src={`data:text/vtt;base64,${btoa(createVTTFile(cues))}`}
+                                                default
+                                            />
+                                        </video>
+
+                                    </div> :
+                                    <div className={playerStyles.videoNotSelectedPlaceholder} >
+                                        <p>Select a video to play</p>
+                                    </div>
+                                }
+                                <div className={playerStyles.titleWrapper}>
+                                    <p>{currentPlayerVideoData?.videoTitle}</p>
+                                </div>
+                            </>
+                    }
                 </div>
             </div>
         );
@@ -130,6 +167,28 @@ const VideoPlayerPage = ({ currentPlayerVideoData, setCurrentPlayerVideoData }) 
                 <button className={pageHeaderStyles.backBtn} type='button' onClick={handleBackBtnClicked}>
                     <Icon className={pageHeaderStyles.backBtIcon} icon="bi:arrow-up" rotate={3} />
                 </button>
+
+                {(isLoading && action === 'uploading') &&
+                    <div className={pageHeaderStyles.uploadingMessageContainer} >
+
+                        <div className={pageHeaderStyles.spinnerDiv} >
+                            <Oval
+                                height={`100%`}
+                                width={`100%`}
+                                color="var(--ui-scheme-color)"
+                                visible={true}
+                                ariaLabel='oval-loading'
+                                secondaryColor="#D6BBFB"
+                                strokeWidth={8}
+                                strokeWidthSecondary={8}
+                                wrapperClass={pageHeaderStyles.spinner}
+                            />
+                        </div>
+                        <div className={pageHeaderStyles.messageDiv} >
+                            <p>Uploading...</p>
+                        </div>
+                    </div>
+                }
             </div>
         );
     };
@@ -138,7 +197,7 @@ const VideoPlayerPage = ({ currentPlayerVideoData, setCurrentPlayerVideoData }) 
         <div className={styles.videoPlayerPageWrapper}>
             <PageHeader />
             <Player />
-            <NextVideosList setCurrentPlayerVideoData={setCurrentPlayerVideoData} />
+            <NextVideosList currentPlayerVideoData={currentPlayerVideoData} setCurrentPlayerVideoData={setCurrentPlayerVideoData} />
         </div>
     );
 };

@@ -20,7 +20,7 @@
 
 .headerText1 {
     position: relative;
-    font-family: 'Poppins';
+    font-family: var(--font-family);
     font-size: 1.5rem;
     color: black;
     margin-left: 4%;
@@ -28,7 +28,7 @@
 
 .headerText2 {
     position: relative;
-    font-family: 'Poppins';
+    font-family: var(--font-family);
     font-size: 1rem;
     color: black;
     margin-left: 4%;
@@ -39,7 +39,7 @@
 .headerText2::after {
     position: absolute;
     content: "";
-    background-color: #9E77ED;
+    background-color: var(--ui-scheme-color);
     width: 40%;
     height: 3px;
     bottom: -8px;
@@ -69,8 +69,6 @@
     display: none;
 }
 
-@media only screen and (max-width: 600px) {
-    
-}
+@media only screen and (max-width: 600px) {}
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {}

@@ -3,9 +3,13 @@ import styles from "./styles/nextVideoListStyles.module.css";
 import nextItemStyles from "./styles/nextVideoItemStyles.module.css"
 import { useSelector } from 'react-redux';
 
-const NextVideosList = ({ setCurrentPlayerVideoData }) => {
+const NextVideosList = ({ setCurrentPlayerVideoData, currentPlayerVideoData }) => {
 
     const videoList = useSelector((state) => state.videos.videosData) || [];
+
+    const filteredVideoList = currentPlayerVideoData
+        ? videoList.filter(vid => vid._id !== currentPlayerVideoData?._id)
+        : videoList;
 
     const NextVideo = ({ nextVidData }) => {
         return (
@@ -15,6 +19,9 @@ const NextVideosList = ({ setCurrentPlayerVideoData }) => {
                         className={nextItemStyles.videoTag}
                         src={nextVidData.videoUrl}
                     />
+                    <div className={nextItemStyles.videoTitleDiv} >
+                        <p>{nextVidData.videoTitle}</p>
+                    </div>
                 </div>
             </div>
         )
@@ -24,10 +31,10 @@ const NextVideosList = ({ setCurrentPlayerVideoData }) => {
     return (
         <div className={styles.nextListWrapper}>
             <div className={styles.nextListHeader}>
-                <p className={styles.nextListHeaderText}>Up Next</p>
+                <p className={styles.nextListHeaderText}>Other Videos</p>
             </div>
             <div className={styles.nextListContentWrapper}>
-                {videoList?.map((vid, indx) => (
+                {filteredVideoList?.map((vid, indx) => (
                     <NextVideo nextVidData={vid} />
                 ))}
             </div>

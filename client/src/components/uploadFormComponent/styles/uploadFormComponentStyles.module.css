@@ -32,6 +32,7 @@
     cursor: pointer;
 }
 
+
 .backBtIcon {
     font-size: 1.2rem;
 }
@@ -41,39 +42,52 @@
 }
 
 
-.submitBtnContainer {
-    position: relative;
-    width: auto;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border: 1px solid red; */
-    margin-right: 5%;
-}
-
 .submitBtn {
-    aspect-ratio: 2/0.8;
-    height: 50%;
+    width: auto;
+    height: 32px;
     background-color: #B692F6;
     outline: none;
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* padding: 25%; */
-    border-radius: 8px;
     cursor: pointer;
     padding: 0;
     margin: 0;
+    /* border: 1px solid red; */
+    margin-right: 3%;
+    border-radius: 8px;
+
 }
 
-.submitBtn p {
-    font-family: 'Poppins';
+.btnIconDiv {
+    height: 100%;
+    aspect-ratio: 1/1.2;
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnIcon {
+    font-size: 1rem;
+    color: white;
+}
+
+.btnTextDiv {
+    width: auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnTextDiv p {
+    font-family: var(--font-family);
     font-size: 0.8rem;
     color: white;
     margin-right: 10px;
-    margin-left: 10px;
+    margin-left: 0px;
 }
 
 
@@ -115,10 +129,8 @@
         grid-template-columns: 100%;
     }
 
-
     .submitBtn {
-        aspect-ratio: 2/0.8;
-        height: 75%;
+        height: 30px;
         background-color: #B692F6;
         outline: none;
         border: none;
@@ -128,8 +140,33 @@
         border-radius: 8px;
         cursor: pointer;
         padding: 0;
-        margin: 0;
+        margin-right: 10%;
     }
 
 
+}
+
+
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+
+    .submitBtn {
+        height: 32px;
+        background-color: #B692F6;
+        outline: none;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+        cursor: pointer;
+        padding: 0;
+        margin-right: 3%;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+
+    .submitBtn {
+        margin-right: 10%;
+    }
 }

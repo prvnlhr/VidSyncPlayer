@@ -59,8 +59,7 @@ const videoController = {
                 subtitleUrl: subtitleData.Location,
             });
 
-            console.log('MongoDB Response:', videoDetails);
-
+            // console.log('MongoDB Response:', videoDetails);
 
             res.status(200).json(videoDetails);
         } catch (error) {
@@ -72,7 +71,7 @@ const videoController = {
     getAllVideos: async (req, res) => {
         try {
             const allVideos = await VideoDB.find({});
-            console.log(allVideos);
+            // console.log(allVideos);
             res.status(200).json(allVideos);
         } catch (error) {
             console.error(error.message);

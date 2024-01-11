@@ -20,7 +20,6 @@ const VideoLibrary = ({ currentPlayerVideoData, setCurrentPlayerVideoData }) => 
             <div className={styles.videoLibraryContentWrapper}>
                 {
                     isLoading && action === 'fetching' ? (
-
                         <Skeleton />
                     ) : (
                         videoList.map((video) => (

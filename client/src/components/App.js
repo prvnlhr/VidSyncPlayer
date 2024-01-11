@@ -13,9 +13,13 @@ import { Route, Routes } from "react-router-dom";
 import VideoPlayerPage from "./videoPlayerComponent/VideoPlayerPage"
 
 const App = () => {
-
+  const videoState = useSelector((state) => state.videos);
+  const { videosData } = videoState;
 
   const [videosArray, setVideoArray] = useState([]);
+
+  const [] = useState(null);
+
   const [currentPlayingVideo, setCurrentPlayingVideo] = useState(null);
 
   const [showPlayer, setShowPlayer] = useState(false);
@@ -43,7 +47,7 @@ const App = () => {
               element={<VideoPlayerPage currentPlayerVideoData={currentPlayerVideoData} setCurrentPlayerVideoData={setCurrentPlayerVideoData} />}>
             </Route>
             <Route path='/upload'
-              element={<UploadFormComponent />}>
+              element={<UploadFormComponent setCurrentPlayerVideoData={setCurrentPlayerVideoData} />}>
             </Route>
           </Routes>
         </div>

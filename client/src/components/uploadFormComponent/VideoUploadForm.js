@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import styles from "./styles/videoUploadFormStyles.module.css";
 import { uploadFormData } from "../../services/apiServices";
 
-const VideoUploadForm = ({ videoRef, formError, handleSeek, updateShowSubTitleOverlay, seekMode, setSeekMode, showActiveSubtitle, setShowActiveSubtitle, setStartTime, startTime, setEndTime, endTime, subtitles, setSubtitles, selectedVideo, setSelectedVideo, videoTitle, setVideoTitle, setSliderTime, sliderTime, setVideoFile, videoFile }) => {
+const VideoUploadForm = ({ overlaySubTitle, setOverlaySubtitle, videoRef, formError, handleSeek, updateShowSubTitleOverlay, seekMode, setSeekMode, showActiveSubtitle, setShowActiveSubtitle, setStartTime, startTime, setEndTime, endTime, subtitles, setSubtitles, selectedVideo, setSelectedVideo, videoTitle, setVideoTitle, setSliderTime, sliderTime, setVideoFile, videoFile }) => {
 
 
 
@@ -13,16 +13,7 @@ const VideoUploadForm = ({ videoRef, formError, handleSeek, updateShowSubTitleOv
     }
 
 
-
-
-
-
-
     const [isPlaying, setIsPlaying] = useState(false);
-
-
-
-
     const playPauseHandler = () => {
         const video = videoRef.current;
 
@@ -58,17 +49,6 @@ const VideoUploadForm = ({ videoRef, formError, handleSeek, updateShowSubTitleOv
         videoInputRef.current.click();
     };
 
-    // const handleFileChange = (e) => {
-
-    //     const file = e.target.files[0];
-    //     setVideoFile(file);
-    //     if (file && file.type.includes('video')) {
-    //         setSelectedVideo(URL.createObjectURL(file));
-    //     } else {
-    //         alert('Please select a valid video file.');
-    //     }
-    // };
-
     const previewVideo = () => {
         const videoInput = videoInputRef.current;
         const selectedVideo = videoInput.files[0];
@@ -78,6 +58,8 @@ const VideoUploadForm = ({ videoRef, formError, handleSeek, updateShowSubTitleOv
             setSelectedVideo(videoURL);
         }
     };
+
+
 
 
     return (
@@ -93,7 +75,7 @@ const VideoUploadForm = ({ videoRef, formError, handleSeek, updateShowSubTitleOv
                         accept="video/*"
                         onChange={previewVideo}
                     />
-                    {selectedVideo && (
+                    {selectedVideo ? (
                         <video className={styles.previewVideoTag}
                             ref={videoRef}
                             onTimeUpdate={seekMode ? handleSeek : null}
@@ -103,10 +85,18 @@ const VideoUploadForm = ({ videoRef, formError, handleSeek, updateShowSubTitleOv
                             <source src={selectedVideo} type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                    )}
+                    ) :
+                        <div className={styles.selectPlaceholderContainer}>
+                            <Icon className={styles.clickIcon} icon="ph:cursor-click-light" />
+                            <p className={styles.selectText}>Click to select a video</p>
+                            <p className={styles.supportedFormatText}>
+                                Supported formats: <span>MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, OGG</span>
+                            </p>
+                        </div>
+                    }
                     {selectedVideo &&
                         <div className={styles.vidSubtitleDiv}>
-                            {/* <p>This is sample subtitle text</p> */}
+                            {/* <p>{overlaySubTitle}</p> */}
                         </div>
                     }
                 </div>
@@ -144,7 +134,7 @@ const VideoUploadForm = ({ videoRef, formError, handleSeek, updateShowSubTitleOv
                     <div className={styles.vidTitleInputContainer} style={{ border: formError && (videoTitle.length === 0) ? '2px solid red' : '' }}>
                         <div className={`${styles.vidTitleInputInnerContainer} ${(currFocusField === 1) && styles.focusFieldStyle} `}  >
                             <div className={styles.labelWrapper} >
-                                <p style={{ color: selectedVideo ? '#7F56D9' : '#98A2B3' }} className={styles.labelText}>VIDEO TITLE</p>
+                                <p style={{ color: selectedVideo ? 'var(--ui-scheme-color)' : '#98A2B3' }} className={styles.labelText}>VIDEO TITLE</p>
                             </div>
                             <div className={styles.inputWrapper}>
                                 <input

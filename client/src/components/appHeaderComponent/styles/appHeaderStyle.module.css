@@ -12,6 +12,25 @@
     width: 50%;
     height: 100%;
     /* border: 1px solid slateblue; */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.appLogoWrapper p {
+    /* font-family: var(--font-family); */
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: 'Montserrat Subrayada', sans-serif;
+    margin-left: 20px;
+
+}
+
+.appLogoSvg {
+    height: 60%;
+    margin-left: 5%;
+    /* border: 1px solid red; */
 }
 
 .headerBtnWrapper {
@@ -21,7 +40,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding-right: 2%;
+    padding-right: 0%;
 }
 
 .uploadBtn {
@@ -29,7 +48,7 @@
     background-color: white;
     width: auto;
     height: 50%;
-    color: #9E77ED;
+    color: var(--ui-scheme-color);
     border-radius: 8px;
     padding-left: 10px;
     padding-right: 10px;
@@ -37,15 +56,39 @@
     justify-content: space-around;
     align-items: center;
     cursor: pointer;
+    border: 2px solid var(--ui-scheme-color);
+    margin-right: 5%;
 }
 
 .uploadIcon {
     font-size: 1rem;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .uploadBtn p {
     font-size: 0.8rem;
     font-weight: 600;
+
+}
+
+@media only screen and (max-width: 600px) {}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .uploadBtn {
+        border: none;
+        background-color: white;
+        width: auto;
+        height: 50%;
+        color: var(--ui-scheme-color);
+        border-radius: 8px;
+        padding-left: 10px;
+        padding-right: 10px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        cursor: pointer;
+        border: 2px solid var(--ui-scheme-color);
+        margin-right: 10%;
+    }
 
 }
