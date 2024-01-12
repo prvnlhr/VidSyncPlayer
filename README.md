@@ -1,4 +1,4 @@
-# MERN Video Subtitler
+# MERN Video Subtitler app
 
 Welcome to the MERN Video Subtitler project! This application empowers users to seamlessly add custom subtitles to a video file and preview the result in real-time. The project is built using the MERN (MongoDB, Express.js, React, Node.js) stack.
 
@@ -20,7 +20,7 @@ Welcome to the MERN Video Subtitler project! This application empowers users to 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/mern-video-subtitler.git
+   git clone https://github.com/prvnlhr/VidSyncPlayer.git
    cd mern-video-subtitler
    ```
 
@@ -28,7 +28,7 @@ Welcome to the MERN Video Subtitler project! This application empowers users to 
 
    ```bash
    cd client && npm install
-   cd ../server && npm install
+   npm install
    ```
 
 3. Set up environment variables:
