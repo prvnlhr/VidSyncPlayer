@@ -144,6 +144,7 @@ const VideoPlayerPage = ({ currentPlayerVideoData, setCurrentPlayerVideoData }) 
                                                 src={`data:text/vtt;base64,${btoa(createVTTFile(cues))}`}
                                                 default
                                             />
+
                                         </video>
 
                                     </div> :

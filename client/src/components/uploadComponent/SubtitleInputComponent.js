@@ -258,6 +258,7 @@ const SubtitleInputComponent = ({
                                         disabled={selectedVideo ? false : true}
                                         className={`${styles.timeInput}`}
                                         value={formatTime(startTime).minutes}
+                                        readOnly={true}
                                         onChange={(e) =>
                                             setStartTime((parseFloat(e.target.value) * 60) + parseFloat(formatTime(startTime).seconds) + (parseFloat(formatTime(startTime).milliseconds) / 1000))
                                         }
@@ -272,6 +273,8 @@ const SubtitleInputComponent = ({
                                         <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
                                     </button>
                                     <input
+                                        readOnly={true}
+
                                         style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
                                         disabled={selectedVideo ? false : true}
                                         className={`${styles.timeInput}`}
@@ -290,6 +293,7 @@ const SubtitleInputComponent = ({
                                         <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
                                     </button>
                                     <input
+                                        readOnly={true}
                                         style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
                                         className={` ${styles.timeInput}`}
                                         value={formatTime(startTime).milliseconds}
@@ -319,6 +323,7 @@ const SubtitleInputComponent = ({
                                         <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
                                     </button>
                                     <input
+                                        readOnly={true}
                                         style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
                                         disabled={selectedVideo ? false : true}
                                         className={`${styles.timeInput}`}
@@ -337,6 +342,7 @@ const SubtitleInputComponent = ({
                                         <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
                                     </button>
                                     <input
+                                        readOnly={true}
                                         style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
                                         disabled={selectedVideo ? false : true}
                                         className={`${styles.timeInput}`}
@@ -355,6 +361,8 @@ const SubtitleInputComponent = ({
                                         <Icon className={styles.incredecreIcon} icon="eva:chevron-up-fill" rotate={4} />
                                     </button>
                                     <input
+                                        readOnly={true}
+
                                         style={{ color: selectedVideo ? 'black' : '#D0D5DD' }}
                                         disabled={selectedVideo ? false : true}
                                         className={` ${styles.timeInput}`}
@@ -405,7 +413,8 @@ const SubtitleInputComponent = ({
                 <div className={styles.add_list_and_header_wrapper}>
 
                     <div className={styles.addedListHeaderWraper}>
-                        <p>Added Subtitles</p>
+                        <p className={styles.mainHeaderText} >Added Subtitles  {subtitles && subtitles.length > 0 && <span> • Click on a list item to view</span>}</p>
+
                     </div>
 
                     <div className={styles.addedSubsListWrapper}>

@@ -6,6 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+
 }
 
 .subtitleInputInnerWrapper {
@@ -79,6 +80,7 @@
     /* border: 1px solid red; */
     background-color: #F3F5F9;
     border-radius: 15px;
+
 }
 
 .endTimeContainer {
@@ -127,6 +129,7 @@
         "minWrapper secWrapper milliSecWrapper";
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
     grid-template-rows: 100%;
+
 }
 
 /* -------------------------------- */
@@ -138,6 +141,7 @@
     justify-content: center;
     align-items: center;
     /* border: 1px solid red; */
+
 }
 
 .minWrapper {
@@ -153,20 +157,23 @@
 }
 
 .timeInput {
-    width: 100%;
+    width: 80%;
     height: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
     margin: 0;
-    /* border: 1px solid slategray; */
+    border: 1.5px solid #D0D5DD !important;
     outline: none;
     background: transparent;
     text-align: center;
-    font-size: 0.9rem;
+    /* font-size: 1rem; */
+    font-size: clamp(0.6rem, 0.4281629735525375rem + 0.45746962115797vw, 1.0rem) !important;
+
     font-weight: 600;
     font-family: var(--font-family);
+    border-radius: 5px;
 }
 
 .timeToggleBtn {
@@ -185,7 +192,9 @@
 }
 
 .incredecreIcon {
-    font-size: 0.8rem;
+    font-size: 1rem;
+    /* border: 1px solid red; */
+    color: #42307D;
 }
 
 /* -------------------------------- */
@@ -267,7 +276,7 @@
 
 .add_list_and_header_wrapper {
     width: 100%;
-    height: 60%;
+    height: 50%;
     /* border: 1px solid green; */
     display: flex;
     flex-direction: column;
@@ -287,11 +296,17 @@
 }
 
 
-.addedListHeaderWraper p {
+.mainHeaderText {
     font-size: 0.8rem;
     font-family: var(--font-family);
     color: var(--font-color-primary);
     margin-left: 2%;
+}
+
+.addedListHeaderWraper span {
+    color: #98A2B3;
+    font-size: 0.7rem;
+    font-style: italic;
 }
 
 .addedListHeaderWraper::after {
@@ -496,6 +511,7 @@
         padding: 0%;
     }
 
+
     .subtitleTextInput {
         font-size: 0.8rem;
         font-weight: 500;
@@ -581,6 +597,24 @@
         width: 100%;
         height: 60%;
         min-height: 60%;
+    }
+
+    .timeInput {
+        width: 80%;
+        height: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        border: 1.5px solid #d0d5dd82;
+        outline: none;
+        background: transparent;
+        text-align: center;
+        font-size: 0.7rem !important;
+        font-weight: 600;
+        font-family: var(--font-family);
+        border-radius: 5px;
     }
 
 }
