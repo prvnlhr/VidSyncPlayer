@@ -1,4 +1,8 @@
+Absolutely! Here's the updated README with the live demo link added at the top:
+
 # MERN Video Subtitler app
+
+**Live Demo: [VidSyncPlayer](https://vidsyncplayer.onrender.com)**
 
 Welcome to the MERN Video Subtitler project! This application empowers users to seamlessly add custom subtitles to a video file and preview the result in real-time. The project is built using the MERN (MongoDB, Express.js, React, Node.js) stack.
 
@@ -11,7 +15,7 @@ Welcome to the MERN Video Subtitler project! This application empowers users to 
 
 - **Subtitle Input:**
   - Users have the option to input subtitle text.
-  - The application allows users to fine-tune start and end times for subtitles in minutes, seconds, and milliseconds from  timestamp input fields.
+  - The application allows users to fine-tune start and end times for subtitles in minutes, seconds, and milliseconds from timestamp input fields.
   - Users can add multiple subtitles for different timestamps in the video.
   - To ensure accuracy, users can click on list items to check the subtitles associated with specific timestamps.
 
@@ -33,7 +37,7 @@ Welcome to the MERN Video Subtitler project! This application empowers users to 
 
 3. Set up environment variables:
 
-   Create a `.env` file in the root  directory with the following variables:
+   Create a `.env` file in the root directory with the following variables:
 
    ```env
    CLIENT_URL = http://localhost:3000
@@ -44,7 +48,7 @@ Welcome to the MERN Video Subtitler project! This application empowers users to 
    S3_BUCKET_NAME=your_aws_s3_bucket_name
    ```
 
-    Create a `.env` file in the `client` directory with the following variables:
+   Create a `.env` file in the `client` directory with the following variables:
 
    ```env
    REACT_APP_BASE_URL:http://localhost:9000
@@ -53,13 +57,13 @@ Welcome to the MERN Video Subtitler project! This application empowers users to 
 4. Run the application:
 
    ```bash
-   # To run server : In the 'root dir' directory
+   # To run server: In the 'root dir' directory
    npm run server
 
-   # In the run client : In the 'root dir 'directory
+   # To run client: In the 'root dir' directory
    npm run client
 
-   # OR run server and client concurrently
+   # OR run server and client concurrently: In the 'root dir' directory
    npm run dev
    ```
 
@@ -72,5 +76,6 @@ Welcome to the MERN Video Subtitler project! This application empowers users to 
 - **React:** Frontend library for building the user interface.
 - **Node.js:** JavaScript runtime for server-side development.
 - **AWS S3:** Cloud storage for uploading video and subtitle files.
-- **Redux Toolkit:** Client side state management.
+- **Redux Toolkit:** Client-side state management.
 
+Enjoy exploring the live demo at [VidSyncPlayer](https://vidsyncplayer.onrender.com)!
