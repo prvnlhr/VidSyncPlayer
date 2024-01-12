@@ -1,0 +1,172 @@
+.uploadComponentWrapper {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    /* border: 1px solid red; */
+    flex-direction: column;
+}
+
+/* ------------------------------ */
+.headerWrapper {
+    width: 100%;
+    height: 10%;
+    /* border: 1px solid blue; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.backBtn {
+    background: transparent;
+    /* border: 1px solid red; */
+    height: 80%;
+    width: auto;
+    margin: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 2%;
+    cursor: pointer;
+}
+
+
+.backBtIcon {
+    font-size: 1.2rem;
+}
+
+.backBtn:hover {
+    /* border: 1px solid cyan; */
+}
+
+
+.submitBtn {
+    width: auto;
+    height: 32px;
+    background-color: #B692F6;
+    outline: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    /* border: 1px solid red; */
+    margin-right: 3%;
+    border-radius: 8px;
+
+}
+
+.btnIconDiv {
+    height: 100%;
+    aspect-ratio: 1/1.2;
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnIcon {
+    font-size: 1rem;
+    color: white;
+}
+
+.btnTextDiv {
+    width: auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnTextDiv p {
+    font-family: var(--font-family);
+    font-size: 0.8rem;
+    color: white;
+    margin-right: 10px;
+    margin-left: 0px;
+}
+
+
+/* ---------------------------------- */
+
+.uploadComponentInnerWrapper {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    /* border: 1px solid salmon; */
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-rows: 100%;
+    grid-template-columns: 50% 50%;
+}
+
+
+
+
+
+
+@media only screen and (max-width: 600px) {
+
+    .headerWrapper {
+        width: 100%;
+        height: 5%;
+        /* border: 1px solid red; */
+    }
+
+    .uploadComponentInnerWrapper {
+        position: relative;
+        width: 100%;
+        height: 95%;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        grid-template-rows: auto minmax(0, 1fr);
+        grid-template-columns: 100%;
+    }
+
+    .submitBtn {
+        height: 30px;
+        background-color: #B692F6;
+        outline: none;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        cursor: pointer;
+        padding: 0;
+        margin-right: 10%;
+    }
+
+
+}
+
+
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+
+    .submitBtn {
+        height: 32px;
+        background-color: #B692F6;
+        outline: none;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+        cursor: pointer;
+        padding: 0;
+        margin-right: 3%;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+
+    .submitBtn {
+        margin-right: 10%;
+    }
+}

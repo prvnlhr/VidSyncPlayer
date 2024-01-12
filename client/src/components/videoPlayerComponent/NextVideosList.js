@@ -35,7 +35,7 @@ const NextVideosList = ({ setCurrentPlayerVideoData, currentPlayerVideoData }) =
             </div>
             <div className={styles.nextListContentWrapper}>
                 {filteredVideoList?.map((vid, indx) => (
-                    <NextVideo nextVidData={vid} />
+                    <NextVideo key={vid._id} nextVidData={vid} />
                 ))}
             </div>
         </div>

@@ -23,7 +23,7 @@
     font-size: 1rem;
     font-family: var(--font-family);
     font-weight: 500;
-    color: black;
+    color: var(--font-color-primary);
     margin-left: 2%;
 }
 
@@ -94,7 +94,7 @@
         font-size: 1rem;
         font-family: var(--font-family);
         font-weight: 500;
-        color: black;
+        color: var(--font-color-primary);
         margin-left: 8%;
     }
 

@@ -2,10 +2,12 @@ import React from 'react';
 import styles from "./styles/appHeaderStyle.module.css";
 import { Icon } from '@iconify/react';
 import { useNavigate, useLocation } from "react-router-dom";
-const AppHeader = ({ setShowUploadForm }) => {
+const AppHeader = () => {
+
     const location = useLocation();
     const navigate = useNavigate();
 
+    // Determine whether to render the upload button based on the current route
     const shouldRender = location.pathname === '/';
 
     return (

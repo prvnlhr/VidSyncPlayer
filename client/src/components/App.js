@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import appStyles from './app.module.css';
 import AppHeader from './appHeaderComponent/AppHeader';
-import UploadFormComponent from './uploadFormComponent/UploadFormComponent';
+import UploadComponent from './uploadComponent/UploadComponent';
 import VideoLibrary from './videoLibraryComponent/VideoLibrary';
 import VideoPlayerPage from './videoPlayerComponent/VideoPlayerPage';
 import { fetchVideosData } from '../redux/features/videoSlice';
 
 const App = () => {
-  const videoState = useSelector((state) => state.videos);
-  const [showUploadForm, setShowUploadForm] = useState(false);
-  const [currentPlayerVideoData, setCurrentPlayerVideoData] = useState('');
+
   const dispatch = useDispatch();
 
+  // State to store data of the currently playing video
+  const [currentPlayerVideoData, setCurrentPlayerVideoData] = useState('');
+
+  // Fetch video data from the Redux store on component mount
   useEffect(() => {
     dispatch(fetchVideosData());
   }, []);
@@ -21,12 +23,30 @@ const App = () => {
   return (
     <div className={appStyles.app}>
       <div className={appStyles.appInnerWrapper}>
-        <AppHeader setShowUploadForm={setShowUploadForm} />
+
+        {/* Main app header */}
+        <AppHeader />
+
         <div className={appStyles.subComponentWrapper}>
+          {/* React Router for handling different routes */}
           <Routes>
-            <Route path='/' element={<VideoLibrary currentPlayerVideoData={currentPlayerVideoData} setCurrentPlayerVideoData={setCurrentPlayerVideoData} />} />
-            <Route path='/player' element={<VideoPlayerPage currentPlayerVideoData={currentPlayerVideoData} setCurrentPlayerVideoData={setCurrentPlayerVideoData} />} />
-            <Route path='/upload' element={<UploadFormComponent setCurrentPlayerVideoData={setCurrentPlayerVideoData} />} />
+            {/* Route for displaying the video library */}
+            <Route
+              path='/'
+              element={<VideoLibrary currentPlayerVideoData={currentPlayerVideoData} setCurrentPlayerVideoData={setCurrentPlayerVideoData} />}
+            />
+
+            {/* Route for displaying the video player page */}
+            <Route
+              path='/player'
+              element={<VideoPlayerPage currentPlayerVideoData={currentPlayerVideoData} setCurrentPlayerVideoData={setCurrentPlayerVideoData} />}
+            />
+
+            {/* Route for displaying the video upload form */}
+            <Route
+              path='/upload'
+              element={<UploadComponent setCurrentPlayerVideoData={setCurrentPlayerVideoData} />}
+            />
           </Routes>
         </div>
       </div>
